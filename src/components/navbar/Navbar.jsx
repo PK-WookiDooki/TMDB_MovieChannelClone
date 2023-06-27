@@ -54,7 +54,7 @@ const Navbar = () => {
         <div
           className={` ${
             menu ? "block lg:hidden" : "hidden"
-          }  fixed min-h-screen top-0 left-0 bg-black/40 w-full z-[3]`}
+          }  fixed h-screen top-0 left-0 bg-black/40 w-full z-[3]`}
         ></div>
 
         <div className="lg:hidden">

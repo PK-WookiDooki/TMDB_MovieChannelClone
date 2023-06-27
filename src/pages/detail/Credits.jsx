@@ -20,7 +20,7 @@ const Credits = () => {
 
   return (
     <section className=" w-full mt-5">
-      <div className="py-3 w-full bg-slate-400">
+      <div className="py-3 w-full bg-slate-500">
         <div className="w-[85%] mx-auto">
           <Link
             to={".."}
@@ -41,7 +41,7 @@ const Credits = () => {
                   ({movie?.release_date.slice(0, 4)}){" "}
                 </span>{" "}
               </h2>
-              <p className="flex items-center gap-1 text-gray-300 hover:text-white">
+              <p className="flex items-center gap-1 text-gray-200 hover:text-white">
                 {" "}
                 <BsArrowLeft /> Back to Main{" "}
               </p>

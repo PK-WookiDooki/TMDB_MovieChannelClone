@@ -8,7 +8,7 @@ const Rating = ({ formattedRating }) => {
           {formattedRating} <span className="text-xs ml-[1px]">%</span>
         </div>
       </div>
-      <h2 className="w-20">User Score</h2>
+      <h2 className="w-12">User Score</h2>
     </div>
   );
 };
