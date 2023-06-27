@@ -28,17 +28,17 @@ const Credits = () => {
            flex items-center w-fit gap-3"
           >
             <img
-              src={`https://image.tmdb.org/t/p/original` + movie.poster_path}
+              src={`https://image.tmdb.org/t/p/original` + movie?.poster_path}
               alt=""
               className="w-20 overflow-hidden rounded bg-red-200"
             />
             <div className="">
               <h2 className="text-2xl font-bold hover:text-gray-300 mb-1">
                 {" "}
-                {movie.title}{" "}
+                {movie?.title}{" "}
                 <span className="font-medium">
                   {" "}
-                  ({movie.release_date.slice(0, 4)}){" "}
+                  ({movie?.release_date.slice(0, 4)}){" "}
                 </span>{" "}
               </h2>
               <p className="flex items-center gap-1 text-gray-300 hover:text-white">
