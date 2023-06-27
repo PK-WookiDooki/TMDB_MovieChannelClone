@@ -8,10 +8,10 @@ const Hero = ({ image }) => {
         <img
           src={`https://image.tmdb.org/t/p/original` + image}
           alt=""
-          className="w-full md:h-full"
+          className="w-full md:h-full  mix-blend-hard-light "
         />
 
-        <div className=" absolute backdrop-blur-sm p-3 rounded-sm top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80%] bg-black/30 flex flex-col gap-3 ">
+        <div className=" absolute backdrop-blur-sm p-3 rounded-sm top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:w-[85%] md:h-[85%] w-[95%] h-[95%] bg-black/30 flex flex-col justify-center gap-3 ">
           <h1 className="text-5xl font-bold ">Welcome</h1>
           <p className="text-xl font-medium">
             {" "}

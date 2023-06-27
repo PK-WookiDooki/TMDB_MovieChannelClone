@@ -55,28 +55,28 @@ const Detail = () => {
           <img
             src={`https://image.tmdb.org/t/p/original` + movie?.backdrop_path}
             alt=""
-            className="w-full mix-blend-soft-light hidden lg:block "
+            className="w-full mix-blend-hard-light hidden lg:block "
           />
 
           <img
             src={`https://image.tmdb.org/t/p/original` + movie?.poster_path}
             alt=""
-            className="w-full mix-blend-soft-light lg:hidden block "
+            className="w-full mix-blend-hard-light lg:hidden block "
           />
         </div>
 
         {/* movie? details */}
-        <div className="absolute backdrop-blur-[1px] p-3 rounded-sm top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:w-[85%] w-full md:h-[85%] h-full bg-black/30 flex flex-col lg:flex-row items-center lg:gap-8 justify-center lg:justify-normal">
+        <div className="absolute backdrop-blur-[1px] p-3 rounded-sm top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:w-[85%] w-full md:h-[85%] h-full bg-black/50 flex flex-col lg:flex-row items-center lg:gap-8 justify-center lg:justify-normal">
           <Link
             to={".."}
-            className="z-[5] absolute top-0 left-0 px-3 py-2 flex items-center gap-1 hover:text-gray-400 lg:hidden "
+            className="z-[5] absolute top-0 left-0 px-3 py-2 flex items-center gap-1 hover:text-gray-400 lg:hidden mb-5 "
           >
             {" "}
             <BsArrowLeft className="text-xl" /> Back to Main{" "}
           </Link>
 
           {/* poster */}
-          <div className=" lg:h-full lg:min-w-max lg:w-auto w-full overflow-hidden ">
+          <div className=" lg:h-full lg:min-w-max lg:w-auto w-full overflow-hidden mt-5 md:mt-0 ">
             <img
               src={`https://image.tmdb.org/t/p/original` + movie?.poster_path}
               alt=""
@@ -89,7 +89,7 @@ const Detail = () => {
             />
           </div>
 
-          <div className="w-full overflow-y-scroll overflow-x-hidden flex flex-col gap-8">
+          <div className="w-full flex flex-col items-center md:items-start gap-8 overflow-auto md:overflow-visible">
             {/* header */}
             <div className="">
               {/* movie? title */}
@@ -102,7 +102,7 @@ const Detail = () => {
               </h2>
 
               {/* genres and runtime */}
-              <div className="flex gap-1 mt-1 items-center flex-wrap">
+              <div className="flex gap-1 mt-3 items-center flex-wrap">
                 {movie?.genres.map((genre) => {
                   return <Genre key={genre.id} genre={genre} />;
                 })}
@@ -117,7 +117,7 @@ const Detail = () => {
             </div>
 
             {/* ratings and other menu */}
-            <div className=" flex flex-wrap items-center gap-2">
+            <div className=" flex flex-wrap items-center justify-center md:justify-normal gap-3">
               <Rating formattedRating={formattedRating} />
               <div className=" flex items-center ">
                 <SMenu />
@@ -131,7 +131,7 @@ const Detail = () => {
             </div>
 
             {/* movie? overview */}
-            <div className="">
+            <div className=" text-center md:text-start px-3 md:px-0 ">
               <p className="mb-2 italic text-gray-400"> {movie?.tagline} </p>
               <h2 className="text-2xl font-medium text-white mb-2">Overview</h2>
               <p className=" text-sm text-gray-300"> {movie?.overview} </p>
