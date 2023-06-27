@@ -1,0 +1,13 @@
+.nav-link.active {
+  border-bottom: 2px solid;
+  color: white;
+}
+
+@media screen and (max-width: 640px) {
+  .nav-link.active {
+    border-bottom: none;
+    border-left: 4px solid;
+    color: black;
+    background: rgb(0, 0, 0, 0.3);
+  }
+}
