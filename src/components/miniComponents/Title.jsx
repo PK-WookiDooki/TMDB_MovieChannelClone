@@ -5,7 +5,7 @@ const Title = ({ header, text }) => {
     <div className="">
       <h2 className="text-lg"> {header} </h2>{" "}
       {Array.isArray(text) ? (
-        <div className="">
+        <div className="flex items-center flex-wrap gap-1">
           {text.map((item, index) => {
             return (
               <span className="font-light text-gray-300" key={index}>

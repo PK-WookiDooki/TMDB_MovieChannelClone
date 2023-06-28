@@ -24,7 +24,7 @@ const SearchedMovies = () => {
       let allData = [];
 
       for (let i = 1; i <= 5; i++) {
-        const data = await getAllData(i);
+        const data = await getAllData("movie", i);
         allData = [...allData, data].flat();
       }
       setIsLoading(false);

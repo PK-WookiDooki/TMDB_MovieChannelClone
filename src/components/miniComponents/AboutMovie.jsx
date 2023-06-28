@@ -4,7 +4,7 @@ import { BsLink } from "react-icons/bs";
 
 const AboutMovie = ({ movie }) => {
   return (
-    <div className="min-w-max flex flex-col gap-5 select-none ">
+    <div className="w-full flex flex-col gap-5 select-none ">
       <Link
         to={movie?.homepage}
         target="_blank"
@@ -17,7 +17,12 @@ const AboutMovie = ({ movie }) => {
         </p>
       </Link>
 
-      <Title header={"Original Title"} text={movie?.original_title} />
+      <Title
+        header={"Original Title"}
+        text={
+          movie?.original_title ? movie?.original_title : movie?.original_name
+        }
+      />
       <Title header={"Status"} text={movie?.status} />
       <Title header={"Original Language"} text={movie?.spoken_languages} />
       <Title header={"Budget"} text={"-"} />

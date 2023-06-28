@@ -16,3 +16,7 @@ export { default as FullCast } from "./miniComponents/FullCast";
 
 //footer
 export { default as Footer } from "./footer/Footer";
+
+//carousels
+export { default as MCarousel } from "./carousel/MoviesCarousel";
+export { default as TCarousel } from "./carousel/TrailerCarousel";

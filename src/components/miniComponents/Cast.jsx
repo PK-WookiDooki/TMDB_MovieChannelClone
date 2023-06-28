@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 import "./style.css";
 import { useGetMovieCreditsByIDQuery } from "../../features/apis/moviesApi";
+import { useGetTVCreditsByIDQuery } from "../../features/apis/tvApi";
 
-const Cast = ({ id }) => {
-  const { data } = useGetMovieCreditsByIDQuery(id);
-  const allCast = data?.cast.slice(0, 10);
+const Cast = ({ id, type }) => {
+  const { data: movie } = useGetMovieCreditsByIDQuery(id);
+  const { data: show } = useGetTVCreditsByIDQuery(id);
+  const allCast =
+    type === "movie" ? movie?.cast.slice(0, 10) : show?.cast.slice(0, 10);
 
   return (
     <div className="w-full">

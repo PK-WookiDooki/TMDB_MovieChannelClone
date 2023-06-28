@@ -1,8 +1,8 @@
 .cast::-webkit-scrollbar {
-  height: 10px;
+  height: 8px;
 }
 
 .cast::-webkit-scrollbar-thumb {
-  background: #dadada;
+  background: #b9b9b9;
   border-radius: 10px;
 }

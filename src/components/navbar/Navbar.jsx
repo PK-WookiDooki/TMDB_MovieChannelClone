@@ -45,8 +45,10 @@ const Navbar = () => {
         {/* navigation links */}
         <nav className=" hidden font-medium lg:flex items-center gap-5 text-gray-300 hover:text-white ">
           <NLink path={"/"} title={"Home"} />
-          <NLink path={"/about"} title={"About Us"} />
-          <NLink path={"/contact"} title={"Contact"} />
+          <NLink path={"movies"} title={"Movies"} />
+          <NLink path={"tv"} title={"Series"} />
+          <NLink path={"about"} title={"About Us"} />
+          <NLink path={"contact"} title={"Contact"} />
         </nav>
 
         {/* search box */}
@@ -87,8 +89,10 @@ const Navbar = () => {
             <div className="flex flex-1 flex-col px-3 gap-3">
               <div className="flex flex-col font-medium gap-3">
                 <NLink path={"/"} title={"Home"} sm={true} />
-                <NLink path={"/about"} title={"About Us"} sm={true} />
-                <NLink path={"/contact"} title={"Contact"} sm={true} />
+                <NLink path={"movies"} title={"Movies"} sm={true} />
+                <NLink path={"tv"} title={"Series"} sm={true} />
+                <NLink path={"about"} title={"About Us"} sm={true} />
+                <NLink path={"contact"} title={"Contact"} sm={true} />
               </div>
               <SearchInput
                 value={search}

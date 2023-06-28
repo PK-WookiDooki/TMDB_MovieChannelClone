@@ -1,15 +1,6 @@
-import React, { useState } from "react";
-
-import { BsPlayFill } from "react-icons/bs";
 import { RxCross1 } from "react-icons/rx";
 
 const Modal = ({ ytKey, handleModal, active }) => {
-  // const [active, setActive] = useState(false);
-
-  // const handleModal = () => {
-  //   setActive(!active);
-  // };
-
   return (
     <div className="w-full flex items-center justify-center">
       <div className=" md:min-w-[75%] w-[95%] max-w-xl aspect-video ">
