@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { getAllData } from "../../features/apis/getData";
 import { Loader, MCard } from "../../components";
 import Hero from "./Hero";
+import { useDispatch } from "react-redux";
+import { addMovies } from "../../features/services/moviesSlice";
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -9,7 +11,7 @@ const Home = () => {
   const [rand, setRand] = useState(Math.floor(Math.random() * 99));
   const latestMoviePoster = movies[rand]?.backdrop_path;
 
-  console.log(movies[0]);
+  // console.log(movies[0]);
 
   useEffect(() => {
     getMovies();
@@ -40,7 +42,7 @@ const Home = () => {
       <Hero image={latestMoviePoster} />
       <div className=" flex flex-row flex-wrap gap-3 items-center justify-center mt-5 w-full md:w-[85%] mx-auto ">
         {movies?.map((movie) => {
-          return <MCard key={movie.id} movie={movie} />;
+          return <MCard key={movie.id} movie={movie} path={"detail"} />;
         })}
       </div>
     </section>

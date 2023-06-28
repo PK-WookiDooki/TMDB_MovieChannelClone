@@ -13,3 +13,6 @@ export { default as SMenu } from "./miniComponents/SubMenu";
 export { default as Cast } from "./miniComponents/Cast";
 export { default as AboutM } from "./miniComponents/AboutMovie";
 export { default as FullCast } from "./miniComponents/FullCast";
+
+//footer
+export { default as Footer } from "./footer/Footer";

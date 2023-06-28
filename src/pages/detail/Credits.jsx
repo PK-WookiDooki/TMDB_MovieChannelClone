@@ -51,9 +51,11 @@ const Credits = () => {
       </div>
       <div className="w-[85%] mx-auto mt-5 flex flex-col md:flex-row justify-between gap-10">
         <div className="w-full">
+          <h2 className="text-lg font-semibold mb-5"> Cast </h2>
           <FullCast array={cast} />
         </div>
         <div className="w-full">
+          <h2 className="text-lg font-semibold mb-5"> Crew </h2>
           <FullCast array={crew} />
         </div>
       </div>

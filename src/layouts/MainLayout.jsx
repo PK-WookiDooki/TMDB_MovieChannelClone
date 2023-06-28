@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { NB } from "../components";
+import { Footer, NB } from "../components";
 
 const MainLayout = () => {
   return (
@@ -10,7 +10,7 @@ const MainLayout = () => {
         <Outlet />
       </main>
 
-      {/* footer */}
+      <Footer />
     </section>
   );
 };

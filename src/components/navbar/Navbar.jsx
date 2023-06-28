@@ -1,25 +1,34 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NLink from "../links/NLink";
 import { RxCross1, RxHamburgerMenu } from "react-icons/rx";
 import SearchInput from "../input/SearchInput";
 import Account from "../account/Account";
+import { useDispatch } from "react-redux";
+import { setKeyword } from "../../features/services/moviesSlice";
 
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
   const [search, setSearch] = useState("");
 
+  const nav = useNavigate();
+  const dispatch = useDispatch();
+
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
 
+  // console.log(searchedMovies);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSearch("");
     if (!search.trim()) {
-      return alert("NO NO");
+      return nav("/");
     }
-    console.log(search);
+    nav("search");
+    handleMenu();
+    dispatch(setKeyword(search));
+    setSearch("");
   };
 
   const handleMenu = () => {

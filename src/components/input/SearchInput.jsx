@@ -17,7 +17,7 @@ const SearchInput = ({ value, handleChange, handleSubmit, sm }) => {
         value={value}
         onChange={handleChange}
         className={` ${
-          sm ? " placeholder:text-gray-600/70 text-gray-700" : ""
+          sm ? " placeholder:text-gray-600/70 text-black" : ""
         } w-full h-full outline-none px-2 bg-transparent`}
         placeholder="Search Here . . ."
       />

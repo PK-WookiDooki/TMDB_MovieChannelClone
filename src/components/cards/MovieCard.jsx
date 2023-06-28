@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie, path }) => {
   return (
-    <Link to={`detail/${movie.id}`} className="max-w-[150px] group">
+    <Link to={`${path}/${movie.id}`} className="max-w-[150px] group">
       <div className=" rounded-sm overflow-hidden">
         <img
           src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}

@@ -4,11 +4,6 @@ const FullCast = ({ array }) => {
       {array.map((cast) => {
         return (
           <div key={cast?.id} className="  min-w-max">
-            {cast?.department ? (
-              <h2 className="mb-2"> {cast?.department} </h2>
-            ) : (
-              ""
-            )}
             <div className="flex gap-3 items-center">
               <div className="w-20 h-20 overflow-hidden rounded">
                 <img
@@ -31,6 +26,11 @@ const FullCast = ({ array }) => {
                     : cast?.job
                     ? cast?.job
                     : ""}{" "}
+                  {cast?.department ? (
+                    <span className="font-medium">({cast?.department})</span>
+                  ) : (
+                    ""
+                  )}
                 </p>
               </div>
             </div>

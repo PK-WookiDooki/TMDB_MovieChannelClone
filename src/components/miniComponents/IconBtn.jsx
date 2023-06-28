@@ -14,7 +14,7 @@ const IconBtn = ({ icon, tooltip }) => {
         {" "}
         {icon}{" "}
       </button>
-      <p className=" hidden group-hover:block absolute top-12 hover:block px-5 py-1 bg-slate-800 text-white rounded md:left-1/2 transform md:-translate-x-1/2">
+      <p className="hidden md:group-hover:block absolute top-12 md:hover:block px-5 py-1 bg-slate-800 text-white rounded md:left-1/2 transform md:-translate-x-1/2">
         {tooltip}
       </p>
     </div>

@@ -12,7 +12,7 @@ const AboutMovie = ({ movie }) => {
       >
         {" "}
         <BsLink className="text-3xl" />{" "}
-        <p className=" hidden group-hover:block absolute bottom-8 hover:block px-5 py-1 bg-slate-800 text-white rounded md:left-1/2 transform md:-translate-x-1/2 min-w-max">
+        <p className=" hidden md:group-hover:block absolute bottom-8 md:hover:block px-5 py-1 bg-slate-800 text-white rounded md:left-1/2 transform md:-translate-x-1/2 min-w-max">
           Visit Homepage{" "}
         </p>
       </Link>

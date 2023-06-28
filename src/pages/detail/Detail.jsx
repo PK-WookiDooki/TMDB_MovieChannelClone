@@ -20,8 +20,9 @@ const Detail = () => {
   const { id } = useParams();
   const { data: movie, isLoading } = useGetMovieByIDQuery(id);
   const { data: keys } = useGetMovieKeysQuery(id);
-  const officialKey = keys?.results.find((key) =>
-    key.name.includes("Official Trailer")
+  const officialKey = keys?.results.find(
+    (key) =>
+      key.name.includes("Official Trailer") || key.name.includes("Official")
   );
 
   const formattedRunTime = movie?.runtime ? getHrsFromMins(movie?.runtime) : "";
@@ -29,6 +30,8 @@ const Detail = () => {
   const formattedRating = movie?.vote_average
     ? getFormattedRating(movie?.vote_average)
     : "";
+
+  // console.log(officialKey);
 
   if (isLoading) {
     return <Loader />;
