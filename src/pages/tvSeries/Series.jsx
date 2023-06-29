@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { getAllData } from "../../features/apis/getData";
-import { GList, Genre, Loader, MCard } from "../../components";
+import { GList, Loader, MCard } from "../../components";
 import { useGetTVGenresQuery } from "../../features/apis/tvApi";
 import { useSelector } from "react-redux";
+import errImage from "../../assets/images/error.png";
 
 const Series = () => {
   const [series, setSeries] = useState([]);
@@ -40,7 +41,7 @@ const Series = () => {
   }
 
   return (
-    <section className="mt-5 w-full md:w-[85%] mx-auto flex flex-col gap-5 md:flex-row items-start ">
+    <div className="mt-5 w-full md:w-[85%] mx-auto flex flex-col gap-5 md:flex-row items-start ">
       <GList genres={genres} movies={series} type={"tv"} />
       {filteredSeries?.length > 0 ? (
         <div className=" flex flex-row flex-wrap gap-3 justify-center w-full my-auto ">
@@ -50,15 +51,11 @@ const Series = () => {
         </div>
       ) : (
         <div className=" bg-slate-800 w-full text-center py-5 rounded-sm h-full flex items-center justify-center mx-auto ">
+          <img src={errImage} alt="" />
           <h2 className="my-auto text-2xl "> Sorry, No Results Found!</h2>
         </div>
       )}
-      {/* <div className=" flex flex-row flex-wrap gap-3 items-center justify-center ">
-        {series?.map((show) => {
-          return <MCard key={show.id} movie={show} path={"detail"} />;
-        })}
-      </div> */}
-    </section>
+    </div>
   );
 };
 

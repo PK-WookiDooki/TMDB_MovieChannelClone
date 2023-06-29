@@ -24,8 +24,9 @@ const SearchedMovies = () => {
       let allData = [];
 
       for (let i = 1; i <= 5; i++) {
-        const data = await getAllData("movie", i);
-        allData = [...allData, data].flat();
+        const allMovies = await getAllData("movie", i);
+        const allSeries = await getAllData("tv", i);
+        allData = [...allData, allMovies, allSeries].flat();
       }
       setIsLoading(false);
       setMovies(allData);
@@ -34,9 +35,13 @@ const SearchedMovies = () => {
     }
   };
 
-  const searchedMovies = movies?.filter((movie) =>
-    movie.title.toLowerCase().includes(usedKeyword.toLowerCase())
+  const searchedMovies = movies?.filter(
+    (movie) =>
+      movie.title?.toLowerCase().includes(usedKeyword.toLowerCase()) ||
+      movie.name?.toLowerCase().includes(usedKeyword.toLowerCase())
   );
+
+  console.log(searchedMovies);
 
   if (isLoading) {
     return <Loader />;
@@ -44,12 +49,18 @@ const SearchedMovies = () => {
 
   const backLink = (
     <p className="w-fit hover:text-white text-gray-300">
-      <Link to={"/"} className="flex items-center gap-1">
+      <Link to={".."} className="flex items-center gap-1">
         {" "}
         <BsArrowLeft className="text-xl" /> Back to Main
       </Link>
     </p>
   );
+
+  const detailPath = (movie) => {
+    const path = movie.release_date ? "/movies/detail" : "/tv/detail";
+
+    return path;
+  };
 
   return (
     <section className="w-full">
@@ -66,7 +77,7 @@ const SearchedMovies = () => {
           <div className="flex flex-row flex-wrap gap-3 items-center justify-center w-full md:w-[85%] mx-auto mt-5">
             {searchedMovies?.map((movie) => {
               return (
-                <MCard key={movie.id} movie={movie} path={"/movies/detail"} />
+                <MCard key={movie.id} movie={movie} path={detailPath(movie)} />
               );
             })}
           </div>

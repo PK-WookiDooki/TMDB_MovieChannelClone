@@ -18,8 +18,6 @@ const Navbar = () => {
     setSearch(e.target.value);
   };
 
-  // console.log(searchedMovies);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!search.trim()) {
@@ -35,101 +33,109 @@ const Navbar = () => {
     setMenu(!menu);
   };
 
-  return (
-    <nav className="bg-slate-800 drop-shadow-md shadow-md sticky top-0 z-10 ">
-      <div className="w-[85%] mx-auto py-5 flex flex-row items-center justify-between">
-        {/* brand title */}
-        <h2 className="text-xl font-semibold z-[5]">
-          <Link to={"/"}> PK-MovieChannel </Link>
-        </h2>
-        {/* navigation links */}
-        <nav className=" hidden font-medium lg:flex items-center gap-5 text-gray-300 hover:text-white ">
-          <NLink path={"/"} title={"Home"} />
-          <NLink path={"movies"} title={"Movies"} />
-          <NLink path={"tv"} title={"Series"} />
-          <NLink path={"about"} title={"About Us"} />
-          <NLink path={"contact"} title={"Contact"} />
-        </nav>
-
-        {/* search box */}
-        <div className=" hidden lg:flex items-center gap-3 ">
-          <SearchInput
-            value={search}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
+  const mobileNav = (
+    <div
+      className={`flex flex-col fixed h-screen top-0 right-0 w-60 bg-gray-200 transform ${
+        menu ? " translate-x-0 " : " translate-x-[400px]  "
+      } lg:hidden gap-5 duration-300 py-[22px] z-10 text-black`}
+    >
+      <button onClick={handleMenu} className="text-2xl ml-4 mt-[2px]">
+        <RxCross1 />
+      </button>
+      <div className="flex flex-1 flex-col px-4 gap-3">
+        <div className="flex flex-col font-medium gap-3">
+          <NLink
+            handleChange={handleMenu}
+            path={"/"}
+            title={"Home"}
+            sm={true}
           />
-          <Account />
+          <NLink
+            handleChange={handleMenu}
+            path={"movies"}
+            title={"Movies"}
+            sm={true}
+          />
+          <NLink
+            handleChange={handleMenu}
+            path={"tv"}
+            title={"Series"}
+            sm={true}
+          />
+          <NLink
+            handleChange={handleMenu}
+            path={"about"}
+            title={"About Us"}
+            sm={true}
+          />
+          <NLink
+            handleChange={handleMenu}
+            path={"contact"}
+            title={"Contact"}
+            sm={true}
+          />
         </div>
+        <SearchInput
+          value={search}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          sm={true}
+        />
+        <div className="mt-auto">
+          <Account sm={true} />
+        </div>
+      </div>
+    </div>
+  );
 
-        {/* this's a background when menu is activated */}
-        <div
-          className={` ${
-            menu ? "block lg:hidden" : "hidden"
-          }  fixed h-screen top-0 left-0 bg-black/40 w-full z-[3]`}
-        ></div>
+  return (
+    <div className="sticky top-0 z-10">
+      <section className="bg-slate-800 drop-shadow-md shadow-md">
+        <nav className="w-[85%] mx-auto py-5 flex items-center justify-between">
+          {/* brand title */}
+          <h2 className="text-xl font-semibold z-[5]">
+            <Link to={"/"}> PK-MovieChannel </Link>
+          </h2>
 
-        <div className="lg:hidden">
+          {/* navigation links */}
+          <ul className=" hidden font-medium lg:flex items-center gap-5 text-gray-300 hover:text-white ">
+            <NLink path={"/"} title={"Home"} />
+            <NLink path={"movies"} title={"Movies"} />
+            <NLink path={"tv"} title={"Series"} />
+            <NLink path={"about"} title={"About Us"} />
+            <NLink path={"contact"} title={"Contact"} />
+          </ul>
+
+          {/* search box */}
+          <div className=" hidden lg:flex items-center gap-3 ">
+            <SearchInput
+              value={search}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+            />
+            <Account />
+          </div>
+
+          {/* this's a background when menu is activated */}
+          <div
+            className={` ${
+              menu ? "block lg:hidden" : "hidden"
+            }  fixed h-screen top-0 left-0 bg-black/40 w-full z-[3]`}
+          ></div>
+
           {/* menu trigger button */}
-          <button onClick={handleMenu} className={`text-2xl `}>
+          <button onClick={handleMenu} className={`text-2xl lg:hidden `}>
             <RxHamburgerMenu />
           </button>
 
-          {/* menu for small devices */}
-          <div
-            className={` flex-col fixed h-screen top-0 right-0 w-60 bg-gray-200 ${
-              menu ? "flex lg:hidden" : "hidden "
-            }  gap-5 duration-300 py-[22px] z-20  text-black`}
-          >
-            <button onClick={handleMenu} className="text-2xl ml-4 mt-[2px]">
-              <RxCross1 />
-            </button>
-            <div className="flex flex-1 flex-col px-4 gap-3">
-              <div className="flex flex-col font-medium gap-3">
-                <NLink
-                  handleChange={handleMenu}
-                  path={"/"}
-                  title={"Home"}
-                  sm={true}
-                />
-                <NLink
-                  handleChange={handleMenu}
-                  path={"movies"}
-                  title={"Movies"}
-                  sm={true}
-                />
-                <NLink
-                  handleChange={handleMenu}
-                  path={"tv"}
-                  title={"Series"}
-                  sm={true}
-                />
-                <NLink
-                  handleChange={handleMenu}
-                  path={"about"}
-                  title={"About Us"}
-                  sm={true}
-                />
-                <NLink
-                  handleChange={handleMenu}
-                  path={"contact"}
-                  title={"Contact"}
-                  sm={true}
-                />
-              </div>
-              <SearchInput
-                value={search}
-                handleChange={handleChange}
-                handleSubmit={handleSubmit}
-                sm={true}
-              />
-              <div className="mt-auto">
-                <Account sm={true} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
+          {/* className={` flex-col fixed h-screen top-0 right-0 w-60 bg-gray-200 ${
+            menu ? "flex lg:hidden" : "hidden "
+          }  gap-5 duration-300 py-[22px] z-20  text-black`} */}
+        </nav>
+      </section>
+      {/* menu for small devices */}
+      {mobileNav}
+    </div>
   );
 };
 
