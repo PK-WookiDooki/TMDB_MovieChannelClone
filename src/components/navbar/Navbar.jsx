@@ -39,7 +39,7 @@ const Navbar = () => {
         menu ? " translate-x-0 " : " translate-x-[400px]  "
       } lg:hidden gap-5 duration-300 py-[22px] z-10 text-black`}
     >
-      <button onClick={handleMenu} className="text-2xl ml-4 mt-[2px]">
+      <button onClick={handleMenu} className="text-2xl ml-4 mt-[2px] w-fit">
         <RxCross1 />
       </button>
       <div className="flex flex-1 flex-col px-4 gap-3">
