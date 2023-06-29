@@ -5,12 +5,12 @@ const token =
 
 export const tvApi = createApi({
   reducerPath: "tvApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://api.themoviedb.org/3/tv/" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "https://api.themoviedb.org/3/" }),
   tagTypes: ["tvApi"],
   endpoints: (builder) => ({
     getTVByID: builder.query({
       query: (id) => ({
-        url: `${id}?language=en-US`,
+        url: `tv/${id}?language=en-US`,
         method: "GET",
         headers: { authorization: `Bearer ${token}` },
       }),
@@ -19,7 +19,7 @@ export const tvApi = createApi({
 
     getTVKeys: builder.query({
       query: (id) => ({
-        url: `${id}/videos?language=en-US`,
+        url: `tv/${id}/videos?language=en-US`,
         method: "GET",
         headers: { authorization: `Bearer ${token}` },
       }),
@@ -28,7 +28,16 @@ export const tvApi = createApi({
 
     getTVCreditsByID: builder.query({
       query: (id) => ({
-        url: `${id}/credits?language=en-US`,
+        url: `tv/${id}/credits?language=en-US`,
+        method: "GET",
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["tvApi"],
+    }),
+
+    getTVGenres: builder.query({
+      query: () => ({
+        url: `genre/tv/list?language=en`,
         method: "GET",
         headers: { authorization: `Bearer ${token}` },
       }),
@@ -41,5 +50,6 @@ export const {
   useGetTVByIDQuery,
   useGetTVKeysQuery,
   useGetTVCreditsByIDQuery,
+  useGetTVGenresQuery,
 } = tvApi;
 export default tvApi.reducer;

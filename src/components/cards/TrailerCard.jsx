@@ -15,9 +15,9 @@ const TrailerCard = ({ movie }) => {
 
   const officialKey = keys?.results.find(
     (key) =>
-      key.name.includes("Official Trailer") ||
       key.name.includes("Official") ||
-      key.name.includes("Trailer")
+      key.name.includes("Trailer") ||
+      key.name.includes(movie?.name)
   );
 
   return (

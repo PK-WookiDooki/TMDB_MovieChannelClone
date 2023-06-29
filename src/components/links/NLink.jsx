@@ -1,9 +1,10 @@
 import { NavLink } from "react-router-dom";
 import "./link.css";
 
-const NLink = ({ path, title, sm }) => {
+const NLink = ({ path, title, sm, handleChange }) => {
   return (
     <NavLink
+      onClick={handleChange}
       to={path}
       className={` nav-link py-1 ${
         sm

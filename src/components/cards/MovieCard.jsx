@@ -11,7 +11,7 @@ const MovieCard = ({ movie, path }) => {
         <img
           src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
           alt=""
-          className="group-hover:scale-[1.15] duration-200"
+          className="group-hover:scale-[1.15] duration-200 w-full h-full object-cover"
         />
       </div>
       <div className="text-gray-400">

@@ -22,9 +22,9 @@ const Detail = () => {
   const { data: keys } = useGetMovieKeysQuery(id);
   const officialKey = keys?.results.find(
     (key) =>
-      key.name.includes("Official Trailer") ||
       key.name.includes("Official") ||
-      key.name.includes("Trailer")
+      key.name.includes("Trailer") ||
+      key.name.includes(movie?.name)
   );
 
   const formattedRunTime = movie?.runtime ? getHrsFromMins(movie?.runtime) : "";
@@ -40,7 +40,7 @@ const Detail = () => {
   }
 
   return (
-    <div className="font-[Poppins] flex flex-col gap-10 w-full select-none">
+    <div className="font-[Poppins] flex flex-col gap-8 w-full select-none">
       {/* youtube trailer */}
       <div
         className={` ${
@@ -71,7 +71,7 @@ const Detail = () => {
         </div>
 
         {/* movie? details */}
-        <div className="absolute backdrop-blur-[1px] p-3 rounded-sm top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:w-[85%] w-full md:h-[85%] h-full bg-black/60 flex flex-col lg:flex-row items-center lg:gap-8 justify-center lg:justify-normal">
+        <div className="absolute backdrop-blur-[1px] p-3 rounded-sm top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:w-[85%] w-full md:h-[85%] h-full bg-black/60 flex flex-col lg:flex-row items-center lg:gap-8 justify-evenly lg:justify-normal">
           <Link
             to={".."}
             className="z-[5] absolute top-0 left-0 px-3 py-2 flex items-center gap-1 hover:text-gray-400 lg:hidden mb-5 "
@@ -90,11 +90,11 @@ const Detail = () => {
             <img
               src={`https://image.tmdb.org/t/p/original` + movie?.backdrop_path}
               alt=""
-              className=" max-h-[500px] h-full w-full object-cover rounded-sm lg:hidden md:block hidden"
+              className=" max-h-[500px] h-full w-full object-cover rounded-sm lg:hidden"
             />
           </div>
 
-          <div className="w-full flex flex-col items-center md:items-start gap-8 overflow-auto md:overflow-visible text-center md:text-left">
+          <div className="w-full flex flex-col items-center md:items-start md:gap-8 gap-4 overflow-auto md:overflow-visible text-center md:text-left">
             {/* header */}
             <div className="">
               {/* movie? title */}
@@ -107,7 +107,7 @@ const Detail = () => {
               </h2>
 
               {/* genres and runtime */}
-              <div className="flex gap-1 mt-3 items-center flex-wrap">
+              <div className="flex gap-1 mt-3 items-center flex-wrap justify-center md:justify-normal">
                 {movie?.genres.map((genre) => {
                   return <Genre key={genre.id} genre={genre} />;
                 })}
@@ -142,19 +142,37 @@ const Detail = () => {
             {/* movie? overview */}
             <div className=" text-center md:text-start px-3 md:px-0 ">
               <p className="mb-2 italic text-gray-400"> {movie?.tagline} </p>
-              <h2 className="text-2xl font-medium text-white mb-2">Overview</h2>
-              {movie?.overview ? (
-                <p className=" text-sm text-gray-300"> {movie?.overview} </p>
-              ) : (
-                <p className=" text-sm text-gray-300">
-                  {" "}
-                  We don't have an overview translated in English. Help us
-                  expand our database by adding one.{" "}
-                </p>
-              )}
+              <div className="hidden md:block">
+                <h2 className="text-2xl font-medium text-white mb-2">
+                  Overview
+                </h2>
+                {movie?.overview ? (
+                  <p className=" text-sm text-gray-300"> {movie?.overview} </p>
+                ) : (
+                  <p className=" text-sm text-gray-300">
+                    {" "}
+                    We don't have an overview translated in English. Help us
+                    expand our database by adding one.{" "}
+                  </p>
+                )}
+              </div>
             </div>
           </div>
         </div>
+      </div>
+
+      <div className=" w-[90%] mx-auto text-white md:hidden ">
+        {/* <p className="mb-2 italic text-gray-400"> {movie?.tagline} </p> */}
+        <h2 className="text-2xl font-medium text-white mb-2">Overview</h2>
+        {movie?.overview ? (
+          <p className=" text-sm text-gray-300"> {movie?.overview} </p>
+        ) : (
+          <p className=" text-sm text-gray-300">
+            {" "}
+            We don't have an overview translated in English. Help us expand our
+            database by adding one.{" "}
+          </p>
+        )}
       </div>
 
       {/* cast and things about the movie */}

@@ -5,12 +5,12 @@ const token =
 
 export const moviesApi = createApi({
   reducerPath: "moviesApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://api.themoviedb.org/3/movie/" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "https://api.themoviedb.org/3/" }),
   tagTypes: ["moviesApi"],
   endpoints: (builder) => ({
     getMovieByID: builder.query({
       query: (id) => ({
-        url: `${id}?language=en-US`,
+        url: `movie/${id}?language=en-US`,
         method: "GET",
         headers: { authorization: `Bearer ${token}` },
       }),
@@ -19,7 +19,7 @@ export const moviesApi = createApi({
 
     getMovieKeys: builder.query({
       query: (id) => ({
-        url: `${id}/videos?language=en-US`,
+        url: `movie/${id}/videos?language=en-US`,
         method: "GET",
         headers: { authorization: `Bearer ${token}` },
       }),
@@ -28,7 +28,16 @@ export const moviesApi = createApi({
 
     getMovieCreditsByID: builder.query({
       query: (id) => ({
-        url: `${id}/credits?language=en-US`,
+        url: `movie/${id}/credits?language=en-US`,
+        method: "GET",
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["moviesApi"],
+    }),
+
+    getMovieGenres: builder.query({
+      query: () => ({
+        url: `genre/movie/list?language=en`,
         method: "GET",
         headers: { authorization: `Bearer ${token}` },
       }),
@@ -41,5 +50,6 @@ export const {
   useGetMovieByIDQuery,
   useGetMovieKeysQuery,
   useGetMovieCreditsByIDQuery,
+  useGetMovieGenresQuery,
 } = moviesApi;
 export default moviesApi.reducer;

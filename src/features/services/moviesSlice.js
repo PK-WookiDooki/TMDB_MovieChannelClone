@@ -4,12 +4,17 @@ import cookie from "cookiejs";
 export const moviesSlice = createSlice({
   name: "movies",
   initialState: {
-    movies: [],
+    filteredMovies: [],
     keyword: "",
+    filteredSeries: [],
   },
   reducers: {
     addMovies: (state, { payload }) => {
-      state.movies = payload;
+      state.filteredMovies = payload;
+    },
+
+    addSeries: (state, { payload }) => {
+      state.filteredSeries = payload;
     },
 
     setKeyword: (state, { payload }) => {
@@ -19,5 +24,5 @@ export const moviesSlice = createSlice({
   },
 });
 
-export const { addMovies, setKeyword } = moviesSlice.actions;
+export const { addMovies, setKeyword, addSeries } = moviesSlice.actions;
 export default moviesSlice.reducer;

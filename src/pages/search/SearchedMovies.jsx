@@ -65,7 +65,9 @@ const SearchedMovies = () => {
           </div>
           <div className="flex flex-row flex-wrap gap-3 items-center justify-center w-full md:w-[85%] mx-auto mt-5">
             {searchedMovies?.map((movie) => {
-              return <MCard key={movie.id} movie={movie} path={"/detail"} />;
+              return (
+                <MCard key={movie.id} movie={movie} path={"/movies/detail"} />
+              );
             })}
           </div>
         </div>

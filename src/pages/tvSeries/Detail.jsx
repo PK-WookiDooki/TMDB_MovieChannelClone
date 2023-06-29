@@ -21,9 +21,9 @@ const Detail = () => {
   const { data: keys } = useGetTVKeysQuery(id);
   const officialKey = keys?.results.find(
     (key) =>
-      key.name.includes("Official Trailer") ||
       key.name.includes("Official") ||
-      key.name.includes("Trailer")
+      key.name.includes("Trailer") ||
+      key.name.includes(show?.name)
   );
   const formattedRating = show?.vote_average
     ? getFormattedRating(show?.vote_average)
@@ -67,7 +67,7 @@ const Detail = () => {
         </div>
 
         {/* show? details */}
-        <div className="absolute backdrop-blur-[1px] p-3 rounded-sm top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:w-[85%] w-full md:h-[85%] h-full bg-black/60 flex flex-col lg:flex-row items-center lg:gap-8 justify-center lg:justify-normal">
+        <div className="absolute backdrop-blur-[1px] p-3 rounded-sm top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:w-[85%] w-full h-full md:h-[85%]  bg-black/60 flex flex-col lg:flex-row items-center lg:gap-8 justify-evenly lg:justify-normal">
           <Link
             to={".."}
             className="z-[5] absolute top-0 left-0 px-3 py-2 flex items-center gap-1 hover:text-gray-400 lg:hidden mb-5 "
@@ -86,7 +86,7 @@ const Detail = () => {
             <img
               src={`https://image.tmdb.org/t/p/original` + show?.backdrop_path}
               alt=""
-              className=" max-h-[500px] h-full w-full object-cover rounded-sm lg:hidden md:block hidden"
+              className=" max-h-[500px] h-full w-full object-cover rounded-sm lg:hidden block "
             />
           </div>
 
@@ -103,7 +103,7 @@ const Detail = () => {
               </h2>
 
               {/* genres and runtime */}
-              <div className="flex gap-1 mt-3 items-center flex-wrap">
+              <div className="flex justify-center gap-1 mt-3 items-center flex-wrap md:justify-normal">
                 {show?.genres.map((genre) => {
                   return <Genre key={genre.id} genre={genre} />;
                 })}
@@ -111,7 +111,7 @@ const Detail = () => {
             </div>
 
             {/* ratings and other menu */}
-            <div className=" flex flex-col md:flex-row items-center justify-center md:justify-normal gap-3">
+            <div className=" flex flex-wrap items-center justify-center md:justify-normal gap-3">
               <Rating formattedRating={formattedRating} />
               <div className=" flex items-center ">
                 <SMenu />
@@ -132,19 +132,37 @@ const Detail = () => {
             {/* show? overview */}
             <div className=" text-center md:text-start px-3 md:px-0 ">
               <p className="mb-2 italic text-gray-400"> {show?.tagline} </p>
-              <h2 className="text-2xl font-medium text-white mb-2">Overview</h2>
-              {show?.overview ? (
-                <p className=" text-sm text-gray-300"> {show?.overview} </p>
-              ) : (
-                <p className=" text-sm text-gray-300">
-                  {" "}
-                  We don't have an overview translated in English. Help us
-                  expand our database by adding one.{" "}
-                </p>
-              )}
+              <div className="hidden md:block">
+                <h2 className="text-2xl font-medium text-white mb-2">
+                  Overview
+                </h2>
+                {show?.overview ? (
+                  <p className=" text-sm text-gray-300"> {show?.overview} </p>
+                ) : (
+                  <p className=" text-sm text-gray-300">
+                    {" "}
+                    We don't have an overview translated in English. Help us
+                    expand our database by adding one.{" "}
+                  </p>
+                )}
+              </div>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* show? overview */}
+      <div className="md:hidden w-[90%] mx-auto ">
+        <h2 className="text-2xl font-medium text-white mb-2">Overview</h2>
+        {show?.overview ? (
+          <p className=" text-sm text-gray-300"> {show?.overview} </p>
+        ) : (
+          <p className=" text-sm text-gray-300">
+            {" "}
+            We don't have an overview translated in English. Help us expand our
+            database by adding one.{" "}
+          </p>
+        )}
       </div>
 
       {/* cast and things about the show */}

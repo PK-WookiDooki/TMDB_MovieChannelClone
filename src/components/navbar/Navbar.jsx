@@ -76,23 +76,45 @@ const Navbar = () => {
 
           {/* menu for small devices */}
           <div
-            className={` flex-col fixed h-screen top-0 right-0 w-52 bg-gray-200 ${
+            className={` flex-col fixed h-screen top-0 right-0 w-60 bg-gray-200 ${
               menu ? "flex lg:hidden" : "hidden "
-            }  gap-5 duration-300 py-5 z-20  text-black`}
+            }  gap-5 duration-300 py-[22px] z-20  text-black`}
           >
-            <button
-              onClick={handleMenu}
-              className="text-2xl self-end mr-[42px] mt-[2px]"
-            >
+            <button onClick={handleMenu} className="text-2xl ml-4 mt-[2px]">
               <RxCross1 />
             </button>
-            <div className="flex flex-1 flex-col px-3 gap-3">
+            <div className="flex flex-1 flex-col px-4 gap-3">
               <div className="flex flex-col font-medium gap-3">
-                <NLink path={"/"} title={"Home"} sm={true} />
-                <NLink path={"movies"} title={"Movies"} sm={true} />
-                <NLink path={"tv"} title={"Series"} sm={true} />
-                <NLink path={"about"} title={"About Us"} sm={true} />
-                <NLink path={"contact"} title={"Contact"} sm={true} />
+                <NLink
+                  handleChange={handleMenu}
+                  path={"/"}
+                  title={"Home"}
+                  sm={true}
+                />
+                <NLink
+                  handleChange={handleMenu}
+                  path={"movies"}
+                  title={"Movies"}
+                  sm={true}
+                />
+                <NLink
+                  handleChange={handleMenu}
+                  path={"tv"}
+                  title={"Series"}
+                  sm={true}
+                />
+                <NLink
+                  handleChange={handleMenu}
+                  path={"about"}
+                  title={"About Us"}
+                  sm={true}
+                />
+                <NLink
+                  handleChange={handleMenu}
+                  path={"contact"}
+                  title={"Contact"}
+                  sm={true}
+                />
               </div>
               <SearchInput
                 value={search}
