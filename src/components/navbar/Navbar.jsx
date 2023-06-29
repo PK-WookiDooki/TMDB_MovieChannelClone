@@ -93,7 +93,10 @@ const Navbar = () => {
       <section className="bg-slate-800 drop-shadow-md shadow-md">
         <nav className="w-[85%] mx-auto py-5 flex items-center justify-between">
           {/* brand title */}
-          <h2 onClick={handleMenu} className="text-xl font-semibold z-[5]">
+          <h2
+            onClick={() => setMenu(false)}
+            className="text-xl font-semibold z-[5]"
+          >
             <Link to={"/"}> PK-MovieChannel </Link>
           </h2>
 
