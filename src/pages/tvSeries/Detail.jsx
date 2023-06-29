@@ -103,7 +103,7 @@ const Detail = () => {
             </div>
 
             {/* ratings and other menu */}
-            <div className=" flex flex-wrap items-center justify-center md:justify-normal gap-3">
+            <div className=" flex flex-col md:flex-row items-center justify-center md:justify-normal gap-3">
               <Rating formattedRating={formattedRating} />
               <div className=" flex items-center ">
                 <SMenu />

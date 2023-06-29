@@ -131,7 +131,7 @@ const Detail = () => {
               </div>
             </div>
 
-            {/* movie? overview */}
+            {/* movie overview */}
             <div className=" text-center md:text-start px-3 md:px-0 ">
               <p className="mb-2 italic text-gray-400"> {movie?.tagline} </p>
               <div className="hidden md:block">
