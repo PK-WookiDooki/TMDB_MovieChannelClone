@@ -72,16 +72,8 @@ const Detail = () => {
 
         {/* movie? details */}
         <div className="absolute backdrop-blur-[1px] p-3 rounded-sm top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:w-[85%] w-full md:h-[85%] h-full bg-black/60 flex flex-col lg:flex-row items-center lg:gap-8 justify-evenly lg:justify-normal">
-          <Link
-            to={".."}
-            className="z-[5] absolute top-0 left-0 px-3 py-2 flex items-center gap-1 hover:text-gray-400 lg:hidden mb-5 "
-          >
-            {" "}
-            <BsArrowLeft className="text-xl" /> Back to Main{" "}
-          </Link>
-
           {/* poster */}
-          <div className=" lg:h-full lg:min-w-max lg:w-auto w-full overflow-hidden mt-5 md:mt-0 ">
+          <div className=" lg:h-full lg:min-w-max lg:w-auto w-[95%] overflow-hidden mt-5 md:mt-0 ">
             <img
               src={`https://image.tmdb.org/t/p/original` + movie?.poster_path}
               alt=""
@@ -196,6 +188,15 @@ const Detail = () => {
         <div className=" w-full ">
           <AboutM movie={movie} />
         </div>
+      </div>
+      <div className="w-[90%] mx-auto relative -mt-5">
+        <Link
+          to={".."}
+          className="z-[5] py-2 w-full bg-slate-500 rounded-sm flex items-center justify-center gap-1 hover:bg-slate-600 duration-200 lg:hidden "
+        >
+          {" "}
+          <BsArrowLeft className="text-xl" /> Back to Main{" "}
+        </Link>
       </div>
     </div>
   );

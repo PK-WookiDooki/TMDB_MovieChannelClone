@@ -67,17 +67,9 @@ const Detail = () => {
         </div>
 
         {/* show? details */}
-        <div className="absolute backdrop-blur-[1px] p-3 rounded-sm top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:w-[85%] w-full h-full md:h-[85%]  bg-black/60 flex flex-col lg:flex-row items-center lg:gap-8 justify-evenly lg:justify-normal">
-          <Link
-            to={".."}
-            className="z-[5] absolute top-0 left-0 px-3 py-2 flex items-center gap-1 hover:text-gray-400 lg:hidden mb-5 "
-          >
-            {" "}
-            <BsArrowLeft className="text-xl" /> Back to Main{" "}
-          </Link>
-
+        <div className="absolute backdrop-blur-[1px] p-3 rounded-sm top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:w-[85%] w-full h-full md:h-[85%]  bg-black/60 flex flex-col lg:flex-row items-center lg:gap-8 gap-4 justify-evenly lg:justify-normal">
           {/* poster */}
-          <div className=" lg:h-full lg:min-w-max lg:w-auto w-full overflow-hidden mt-5 md:mt-0 ">
+          <div className=" lg:h-full lg:min-w-max lg:w-auto w-[95%] overflow-hidden md:mt-0 mt-5 ">
             <img
               src={`https://image.tmdb.org/t/p/original` + show?.poster_path}
               alt=""
@@ -90,7 +82,7 @@ const Detail = () => {
             />
           </div>
 
-          <div className="w-full flex flex-col items-center md:items-start gap-8 overflow-auto md:overflow-visible text-center md:text-left">
+          <div className="w-full flex flex-col items-center md:items-start md:gap-8 gap-4 overflow-auto md:overflow-visible text-center md:text-left">
             {/* header */}
             <div className="">
               {/* show? title */}
@@ -186,6 +178,16 @@ const Detail = () => {
         <div className=" w-full ">
           <AboutM movie={show} />
         </div>
+      </div>
+
+      <div className="w-[90%] mx-auto relative -mt-5">
+        <Link
+          to={".."}
+          className="z-[5] py-2 w-full bg-slate-500 rounded-sm flex items-center justify-center gap-1 hover:bg-slate-600 duration-200 lg:hidden "
+        >
+          {" "}
+          <BsArrowLeft className="text-xl" /> Back to Main{" "}
+        </Link>
       </div>
     </div>
   );
