@@ -5,6 +5,7 @@ export { default as SMovies } from "./search/SearchedMovies";
 
 //404 page
 export { default as NFPage } from "./notFound/NotFound";
+export { default as MNFPage } from "./notFound/MovieNotFound";
 
 //series
 export { default as Series } from "./tvSeries/Series";
@@ -15,3 +16,5 @@ export { default as SCredits } from "./tvSeries/Credits";
 export { default as Movies } from "./movies/Movies";
 export { default as MDetail } from "./movies/Detail";
 export { default as MCredits } from "./movies/Credits";
+
+ 

@@ -14,7 +14,7 @@ const MoviesCarousel = ({ selectedMovies, text, type }) => {
               <MCard
                 key={movie.id}
                 movie={movie}
-                path={type === "movie" ? "movies/detail" : "tv/detail"}
+                path={type === "movie" ? "movies/" : "tv/"}
               />
             );
           })}

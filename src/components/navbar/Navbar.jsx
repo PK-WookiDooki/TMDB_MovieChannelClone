@@ -24,7 +24,7 @@ const Navbar = () => {
       return nav("/");
     }
     nav("search");
-    handleMenu();
+    setMenu(false);
     dispatch(setKeyword(search));
     setSearch("");
   };

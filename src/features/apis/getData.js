@@ -12,9 +12,9 @@ export const getAllData = async (type, pages) => {
 
 export const getTrailerKeys = async (type, id) => {
   const res = await axios.get(
-    `https://api.themoviedb.org/3/${type}/${id}?language=en-US&${API_KEY}`
+    `https://api.themoviedb.org/3/${type}/${id}/videos?language=en-US&${API_KEY}`
   );
 
   const { results } = res.data;
-  return results;
+  return results.length > 0;
 };

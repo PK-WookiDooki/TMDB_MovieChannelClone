@@ -17,7 +17,7 @@ const Movies = () => {
 
   const { filteredMovies } = useSelector((state) => state.movies);
 
-  const { data } = useGetMovieGenresQuery();
+  const { data, isLoading: isNotReady } = useGetMovieGenresQuery();
   const genres = data?.genres;
 
   const getMovies = async () => {
@@ -35,7 +35,7 @@ const Movies = () => {
     }
   };
 
-  if (isLoading) {
+  if (isLoading || isNotReady) {
     return <Loader />;
   }
 
@@ -46,7 +46,7 @@ const Movies = () => {
       {filteredMovies?.length > 0 ? (
         <div className="flex flex-row flex-wrap gap-3 justify-center w-full my-auto">
           {filteredMovies?.map((movie) => {
-            return <MCard key={movie.id} movie={movie} path={"detail"} />;
+            return <MCard key={movie.id} movie={movie} path={""} />;
           })}
         </div>
       ) : (

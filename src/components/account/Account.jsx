@@ -35,6 +35,7 @@ const Account = ({ sm }) => {
         } absolute bg-white rounded-sm text-black text-sm  flex-col p-1  right-0 drop-shadow-lg shadow-inner`}
       >
         <Link
+          onClick={() => setMenu(false)}
           className="h-10 px-2 flex items-center rounded-sm hover:bg-slate-700 hover:text-white"
           to={"/change_password"}
         >
@@ -42,6 +43,7 @@ const Account = ({ sm }) => {
           Change Password{" "}
         </Link>
         <Link
+          onClick={() => setMenu(false)}
           className="h-10 px-2 flex items-center rounded-sm hover:bg-slate-700 hover:text-white"
           to={"/sign_in"}
         >
@@ -49,6 +51,7 @@ const Account = ({ sm }) => {
           Sign In{" "}
         </Link>
         <Link
+          onClick={() => setMenu(false)}
           className="h-10 px-2 flex items-center rounded-sm hover:bg-slate-700 hover:text-white"
           to={"/login"}
         >

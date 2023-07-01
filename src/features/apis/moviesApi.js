@@ -19,7 +19,7 @@ export const moviesApi = createApi({
 
     getMovieKeys: builder.query({
       query: (id) => ({
-        url: `movie/${id}/videos?language=en-US`,
+        url: `movie/${id}/videos?language=en-US&append_to_response=videos`,
         method: "GET",
         headers: { authorization: `Bearer ${token}` },
       }),
@@ -43,6 +43,15 @@ export const moviesApi = createApi({
       }),
       providesTags: ["moviesApi"],
     }),
+
+    getRecommendations: builder.query({
+      query: (id) => ({
+        url: `movie/${id}/recommendations?language=en-US&page=1`,
+        method: "GET",
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["moviesApi"],
+    }),
   }),
 });
 
@@ -51,5 +60,6 @@ export const {
   useGetMovieKeysQuery,
   useGetMovieCreditsByIDQuery,
   useGetMovieGenresQuery,
+  useGetRecommendationsQuery,
 } = moviesApi;
 export default moviesApi.reducer;

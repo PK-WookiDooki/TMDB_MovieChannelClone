@@ -1,13 +1,23 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { AboutM, Cast, Genre, Loader, Rating, SMenu } from "../../components";
+import {
+  AboutM,
+  Cast,
+  Genre,
+  Loader,
+  Rating,
+  RecommendedMovies,
+  SMenu,
+} from "../../components";
 import { getFormattedRating } from "../../features/functions";
 import Modal from "../../components/miniComponents/Modal";
-import { BsArrowLeft, BsArrowRight, BsPlayFill } from "react-icons/bs";
+import { BsArrowLeft, BsPlayFill } from "react-icons/bs";
 import {
   useGetTVByIDQuery,
   useGetTVKeysQuery,
+  useGetTVRecommendationsQuery,
 } from "../../features/apis/tvApi";
+import { MNFPage } from "..";
 
 const Detail = () => {
   const [active, setActive] = useState(false);
@@ -19,6 +29,10 @@ const Detail = () => {
   const { id } = useParams();
   const { data: show, isLoading } = useGetTVByIDQuery(id);
   const { data: keys } = useGetTVKeysQuery(id);
+  const { data: rSeries } = useGetTVRecommendationsQuery(id);
+
+  const recommendedSeries = rSeries?.results.slice(0, 15);
+
   const officialKey = keys?.results.find(
     (key) =>
       key.name.includes("Official") ||
@@ -29,13 +43,7 @@ const Detail = () => {
     ? getFormattedRating(show?.vote_average)
     : "";
 
-  // console.log(officialKey);
-
-  if (isLoading) {
-    return <Loader />;
-  }
-
-  return (
+  const content = show ? (
     <div className="font-[Poppins] flex flex-col gap-10 w-full select-none">
       {/* youtube trailer */}
       <div
@@ -82,7 +90,7 @@ const Detail = () => {
             />
           </div>
 
-          <div className="w-full flex flex-col items-center md:items-start md:gap-8 gap-4 overflow-auto md:overflow-visible text-center md:text-left">
+          <div className="w-full flex flex-col items-center md:items-start md:gap-7 gap-4 overflow-auto md:overflow-visible text-center md:text-left">
             {/* header */}
             <div className="">
               {/* show? title */}
@@ -159,26 +167,30 @@ const Detail = () => {
 
       {/* cast and things about the show */}
       <div
-        className="md:w-[85%] w-[90%] mx-auto  border-b border-gray-500 pb-2 flex flex-col gap-5 md:flex-row justify-center
-       "
+        className="md:w-[85%] w-[90%] mx-auto  border-b border-gray-500 pb-2 flex flex-col gap-5 md:gap-10 md:flex-row justify-center
+   "
       >
         {/* cast and crew */}
         <div className=" md:w-[70%] border-b pb-3 md:pb-0 md:border-0 border-gray-500 ">
-          <h2 className="text-xl font-medium mb-3"> Top Billed Cast </h2>
           <Cast id={show?.id} type={"tv"} />
-          <Link
-            to={"cast"}
-            className="mt-3 flex gap-1 items-center hover:text-gray-400 w-fit"
-          >
-            {" "}
-            Full Cast & Crew <BsArrowRight className="text-xl" />
-          </Link>
         </div>
         {/* somethings about show */}
         <div className=" w-full ">
           <AboutM movie={show} />
         </div>
       </div>
+
+      {/* recommendations  */}
+      {recommendedSeries?.length > 0 ? (
+        <div className=" w-[90%] md:w-[85%] mx-auto border-b border-gray-500 pb-2">
+          <RecommendedMovies
+            recommendedMovies={recommendedSeries}
+            type={"tv"}
+          />
+        </div>
+      ) : (
+        ""
+      )}
 
       <div className="w-[90%] mx-auto relative -mt-5">
         <Link
@@ -190,7 +202,15 @@ const Detail = () => {
         </Link>
       </div>
     </div>
+  ) : (
+    <MNFPage />
   );
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  return content;
 };
 
 export default Detail;

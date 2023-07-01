@@ -1,18 +1,25 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 const MovieCard = ({ movie, path }) => {
+  const image = `https://image.tmdb.org/t/p/original${movie.poster_path}`;
+
   return (
     <Link
-      to={`${path}/${movie.id}`}
+      to={`${path}${movie.id}`}
       className="max-w-[150px] min-w-[150px] group"
     >
       <div className=" rounded-sm overflow-hidden">
-        <img
-          src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-          alt=""
-          className="group-hover:scale-[1.15] duration-200 w-full h-full object-cover"
-        />
+        {image ? (
+          <img
+            src={image}
+            alt=""
+            className="group-hover:scale-[1.15] duration-200 min-h-[225px] object-cover w-full"
+          />
+        ) : (
+          <div className="">
+            <h2>Loading Image . . .</h2>
+          </div>
+        )}
       </div>
       <div className="text-gray-400">
         <h3 className="truncate hover:text-white font-medium">

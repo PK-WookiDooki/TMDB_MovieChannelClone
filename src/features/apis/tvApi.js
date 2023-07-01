@@ -19,7 +19,7 @@ export const tvApi = createApi({
 
     getTVKeys: builder.query({
       query: (id) => ({
-        url: `tv/${id}/videos?language=en-US`,
+        url: `tv/${id}/videos?language=en-US&append_to_response=videos`,
         method: "GET",
         headers: { authorization: `Bearer ${token}` },
       }),
@@ -43,6 +43,15 @@ export const tvApi = createApi({
       }),
       providesTags: ["tvApi"],
     }),
+
+    getTVRecommendations: builder.query({
+      query: (id) => ({
+        url: `tv/${id}/recommendations?language=en-US&page=1`,
+        method: "GET",
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["tvApi"],
+    }),
   }),
 });
 
@@ -51,5 +60,6 @@ export const {
   useGetTVKeysQuery,
   useGetTVCreditsByIDQuery,
   useGetTVGenresQuery,
+  useGetTVRecommendationsQuery,
 } = tvApi;
 export default tvApi.reducer;

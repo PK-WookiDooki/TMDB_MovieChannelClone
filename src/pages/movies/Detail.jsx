@@ -1,14 +1,24 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { AboutM, Cast, Genre, Loader, Rating, SMenu } from "../../components";
+import {
+  AboutM,
+  Cast,
+  Genre,
+  Loader,
+  Rating,
+  RecommendedMovies,
+  SMenu,
+} from "../../components";
 import { getFormattedRating, getHrsFromMins } from "../../features/functions";
 import Modal from "../../components/miniComponents/Modal";
 import "./style.css";
 import {
   useGetMovieByIDQuery,
   useGetMovieKeysQuery,
+  useGetRecommendationsQuery,
 } from "../../features/apis/moviesApi";
 import { BsArrowLeft, BsArrowRight, BsPlayFill } from "react-icons/bs";
+import { MNFPage } from "..";
 
 const Detail = () => {
   const [active, setActive] = useState(false);
@@ -20,6 +30,9 @@ const Detail = () => {
   const { id } = useParams();
   const { data: movie, isLoading } = useGetMovieByIDQuery(id);
   const { data: keys } = useGetMovieKeysQuery(id);
+  const { data: rMovies } = useGetRecommendationsQuery(id);
+  const recommendedMovies = rMovies?.results.slice(0, 15);
+
   const officialKey = keys?.results.find(
     (key) =>
       key.name.includes("Official") ||
@@ -35,12 +48,8 @@ const Detail = () => {
 
   // console.log(officialKey);
 
-  if (isLoading) {
-    return <Loader />;
-  }
-
-  return (
-    <div className="font-[Poppins] flex flex-col gap-8 w-full select-none">
+  const content = movie ? (
+    <div className="font-[Poppins] flex flex-col gap-7 w-full select-none">
       {/* youtube trailer */}
       <div
         className={` ${
@@ -74,16 +83,27 @@ const Detail = () => {
         <div className="absolute backdrop-blur-[1px] p-3 rounded-sm top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:w-[85%] w-full md:h-[85%] h-full bg-black/60 flex flex-col lg:flex-row items-center lg:gap-8 justify-evenly lg:justify-normal">
           {/* poster */}
           <div className=" lg:h-full lg:min-w-max lg:w-auto w-[95%] overflow-hidden mt-5 md:mt-0 ">
-            <img
-              src={`https://image.tmdb.org/t/p/original` + movie?.poster_path}
-              alt=""
-              className="h-full object-contain rounded-sm hidden lg:block"
-            />
-            <img
-              src={`https://image.tmdb.org/t/p/original` + movie?.backdrop_path}
-              alt=""
-              className=" max-h-[500px] h-full w-full object-cover rounded-sm lg:hidden"
-            />
+            {movie?.poster_path ? (
+              <img
+                src={`https://image.tmdb.org/t/p/original` + movie?.poster_path}
+                alt=""
+                className="h-full object-contain rounded-sm hidden lg:block"
+              />
+            ) : (
+              ""
+            )}
+
+            {movie?.backdrop_path ? (
+              <img
+                src={
+                  `https://image.tmdb.org/t/p/original` + movie?.backdrop_path
+                }
+                alt=""
+                className=" max-h-[500px] h-full w-full object-cover rounded-sm lg:hidden"
+              />
+            ) : (
+              ""
+            )}
           </div>
 
           <div className="w-full flex flex-col items-center md:items-start md:gap-8 gap-4 overflow-auto md:overflow-visible text-center md:text-left">
@@ -170,25 +190,30 @@ const Detail = () => {
       {/* cast and things about the movie */}
       <div
         className="md:w-[85%] w-[90%] mx-auto  border-b border-gray-500 pb-2 flex flex-col gap-5 md:flex-row justify-center
-       "
+   "
       >
         {/* cast and crew */}
         <div className=" md:w-[70%] border-b pb-3 md:pb-0 md:border-0 border-gray-500 ">
-          <h2 className="text-xl font-medium mb-3"> Top Billed Cast </h2>
           <Cast id={movie?.id} type={"movie"} />
-          <Link
-            to={"cast"}
-            className="mt-3 flex gap-1 items-center hover:text-gray-400 w-fit"
-          >
-            {" "}
-            Full Cast & Crew <BsArrowRight className="text-xl" />
-          </Link>
         </div>
         {/* somethings about movie */}
         <div className=" w-full ">
           <AboutM movie={movie} />
         </div>
       </div>
+
+      {/* recommendations  */}
+      {recommendedMovies?.length > 0 ? (
+        <div className=" w-[90%] md:w-[85%] mx-auto border-b border-gray-500 pb-2">
+          <RecommendedMovies
+            recommendedMovies={recommendedMovies}
+            type={"movie"}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+
       <div className="w-[90%] mx-auto relative -mt-5">
         <Link
           to={".."}
@@ -199,7 +224,15 @@ const Detail = () => {
         </Link>
       </div>
     </div>
+  ) : (
+    <MNFPage />
   );
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  return content;
 };
 
 export default Detail;

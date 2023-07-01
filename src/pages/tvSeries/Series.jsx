@@ -15,7 +15,7 @@ const Series = () => {
     getMovies();
   }, []);
 
-  const { data } = useGetTVGenresQuery();
+  const { data, isLoading: isNotReady } = useGetTVGenresQuery();
   const genres = data?.genres;
 
   const { filteredSeries } = useSelector((state) => state.movies);
@@ -36,7 +36,7 @@ const Series = () => {
     }
   };
 
-  if (isLoading) {
+  if (isLoading || isNotReady) {
     return <Loader />;
   }
 
@@ -46,7 +46,7 @@ const Series = () => {
       {filteredSeries?.length > 0 ? (
         <div className=" flex flex-row flex-wrap gap-3 justify-center w-full my-auto ">
           {filteredSeries?.map((show) => {
-            return <MCard key={show.id} movie={show} path={"detail"} />;
+            return <MCard key={show.id} movie={show} path={""} />;
           })}
         </div>
       ) : (

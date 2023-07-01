@@ -29,16 +29,7 @@ const Home = () => {
     .filter((mv) => mv.vote_average > 5)
     .slice(0, 15);
 
-  const trailers =
-    latestSeries?.length > 0
-      ? [
-          latestSeries[0],
-          latestSeries[1],
-          latestSeries[3],
-          latestSeries[5],
-          latestSeries[14],
-        ]
-      : null;
+  const trailers = latestSeries?.slice(0, 5);
 
   useEffect(() => {
     getMovies();
@@ -80,9 +71,6 @@ const Home = () => {
     return <Loader />;
   }
 
-  // console.log(trailers ? trailers[0] : "");
-  // console.log(movies ? movies[0] : "");
-
   return (
     <section className=" w-full ">
       <Hero image={latestMoviePoster} />
@@ -94,9 +82,12 @@ const Home = () => {
         type={"movie"}
       />
 
+      {/* trailer carousel */}
       <div className="bg-slate-800 py-3">
         <TCarousel selectedMovies={trailers} text={"Trailers"} />
       </div>
+
+      {/* series carousel */}
       <MCarousel
         selectedMovies={latestSeries}
         text={"What's Popular (Series)"}

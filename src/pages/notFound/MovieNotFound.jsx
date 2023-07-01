@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import nfImage from "../../assets/images/404_2.png";
+import nfImage from "../../assets/images/error.png";
 
-const NotFound = () => {
+const MovieNotFound = () => {
   return (
     <div className="flex flex-col md:flex-row-reverse md:w-[85%] mx-auto md:items-center justify-center ">
       <img
@@ -13,7 +13,7 @@ const NotFound = () => {
         <h2 className="text-3xl font-bold">Sorry</h2>
         <h2 className="text-xl font-medium">
           {" "}
-          The page you were looking for is currently unavailable!{" "}
+          The Movie/Series you were searching for is not found!{" "}
         </h2>
         <Link
           to={".."}
@@ -27,4 +27,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default MovieNotFound;
