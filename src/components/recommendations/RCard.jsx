@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { getFormattedRating } from "../../features/functions";
 import { BsCalendar2DayFill } from "react-icons/bs";
 
-const RCard = ({ movie, path }) => {
+const RCard = ({ movie, path, handleChange }) => {
   return (
-    <Link to={path + movie.id} className="min-w-[250px]">
+    <Link onClick={handleChange} to={path + movie.id} className="min-w-[250px]">
       <div className=" aspect-video group relative overflow-hidden">
         <img
           src={

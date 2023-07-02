@@ -41,7 +41,7 @@ const SearchedMovies = () => {
       movie.name?.toLowerCase().includes(usedKeyword.toLowerCase())
   );
 
-  console.log(searchedMovies);
+  // console.log(searchedMovies);
 
   if (isLoading) {
     return <Loader />;
@@ -56,8 +56,9 @@ const SearchedMovies = () => {
     </p>
   );
 
+  // movie has (release_date) and series has (first_air_date)
   const detailPath = (movie) => {
-    const path = movie.release_date ? "/movies/detail" : "/tv/detail";
+    const path = movie.release_date ? "/movies/" : "/tv/";
 
     return path;
   };

@@ -1,15 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import {
-  MCredits,
   Home,
-  MDetail,
   Movies,
   NFPage,
   SMovies,
   Series,
-  SDetail,
-  SCredits,
+  Detail,
+  Credits,
 } from "./pages";
 
 const App = () => {
@@ -26,8 +24,8 @@ const App = () => {
           <Route path="tv">
             <Route index element={<Series />} />
             <Route path=":id">
-              <Route index element={<SDetail />} />
-              <Route path="cast" element={<SCredits />} />
+              <Route index element={<Detail type={"tv"} />} />
+              <Route path="cast" element={<Credits type={"tv"} />} />
             </Route>
           </Route>
 
@@ -35,8 +33,8 @@ const App = () => {
           <Route path="movies">
             <Route index element={<Movies />} />
             <Route path=":id">
-              <Route index element={<MDetail />} />
-              <Route path="cast" element={<MCredits />} />
+              <Route index element={<Detail type={"movie"} />} />
+              <Route path="cast" element={<Credits type={"movie"} />} />
             </Route>
           </Route>
           <Route path="*" element={<NFPage />} />

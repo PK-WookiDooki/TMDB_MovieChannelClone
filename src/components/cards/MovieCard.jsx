@@ -13,6 +13,7 @@ const MovieCard = ({ movie, path }) => {
           <img
             src={image}
             alt=""
+            loading="lazy"
             className="group-hover:scale-[1.15] duration-200 min-h-[225px] object-cover w-full"
           />
         ) : (

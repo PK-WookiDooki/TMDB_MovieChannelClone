@@ -11,16 +11,22 @@ import {
 } from "../../components";
 import { getFormattedRating, getHrsFromMins } from "../../features/functions";
 import Modal from "../../components/miniComponents/Modal";
-import "./style.css";
 import {
   useGetMovieByIDQuery,
+  useGetMovieCreditsByIDQuery,
   useGetMovieKeysQuery,
   useGetRecommendationsQuery,
 } from "../../features/apis/moviesApi";
-import { BsArrowLeft, BsArrowRight, BsPlayFill } from "react-icons/bs";
+import { BsArrowLeft, BsPlayFill } from "react-icons/bs";
 import { MNFPage } from "..";
+import {
+  useGetTVByIDQuery,
+  useGetTVCreditsByIDQuery,
+  useGetTVKeysQuery,
+  useGetTVRecommendationsQuery,
+} from "../../features/apis/tvApi";
 
-const Detail = () => {
+const Detail = ({ type }) => {
   const [active, setActive] = useState(false);
 
   const handleModal = () => {
@@ -28,27 +34,47 @@ const Detail = () => {
   };
 
   const { id } = useParams();
-  const { data: movie, isLoading } = useGetMovieByIDQuery(id);
-  const { data: keys } = useGetMovieKeysQuery(id);
-  const { data: rMovies } = useGetRecommendationsQuery(id);
-  const recommendedMovies = rMovies?.results.slice(0, 15);
+  const { data: actualMovie, isLoading: MSLoaded } =
+    type === "movie" ? useGetMovieByIDQuery(id) : useGetTVByIDQuery(id);
 
-  const officialKey = keys?.results.find(
+  const { data: actualKeys, isLoading: keysLoaded } =
+    type === "movie" ? useGetMovieKeysQuery(id) : useGetTVKeysQuery(id);
+
+  const { data: recommendedMS, isLoading: RMSLoaded } =
+    type === "movie"
+      ? useGetRecommendationsQuery(id)
+      : useGetTVRecommendationsQuery(id);
+  const recommendations = recommendedMS?.results.slice(0, 15);
+
+  const { data: credits, isLoading: castLoaded } =
+    type === "movie"
+      ? useGetMovieCreditsByIDQuery(id)
+      : useGetTVCreditsByIDQuery(id);
+
+  const allCast = credits?.cast.slice(0, 10);
+  // console.log(allCast)
+
+  //   const actualMovie = type === "movie" ? movie : show;
+  //   const actualKeys = type === "movie" ? mKeys : sKeys;
+
+  const officialKey = actualKeys?.results.find(
     (key) =>
+      key.name.includes("Official Trailer") ||
       key.name.includes("Official") ||
       key.name.includes("Trailer") ||
-      key.name.includes(movie?.name)
+      key.name.includes(actualMovie?.name)
   );
 
-  const formattedRunTime = movie?.runtime ? getHrsFromMins(movie?.runtime) : "";
-
-  const formattedRating = movie?.vote_average
-    ? getFormattedRating(movie?.vote_average)
+  const formattedRunTime = actualMovie?.runtime
+    ? getHrsFromMins(actualMovie?.runtime)
     : "";
 
-  // console.log(officialKey);
+  const formattedRating = actualMovie?.vote_average
+    ? getFormattedRating(actualMovie?.vote_average)
+    : "";
 
-  const content = movie ? (
+  // content
+  const content = actualMovie ? (
     <div className="font-[Poppins] flex flex-col gap-7 w-full select-none">
       {/* youtube trailer */}
       <div
@@ -67,25 +93,32 @@ const Detail = () => {
         <div className="overflow-hidden h-full">
           {/* backdrop poster */}
           <img
-            src={`https://image.tmdb.org/t/p/original` + movie?.backdrop_path}
+            src={
+              `https://image.tmdb.org/t/p/original` + actualMovie?.backdrop_path
+            }
             alt=""
             className="w-full mix-blend-hard-light hidden lg:block "
           />
 
           <img
-            src={`https://image.tmdb.org/t/p/original` + movie?.poster_path}
+            src={
+              `https://image.tmdb.org/t/p/original` + actualMovie?.poster_path
+            }
             alt=""
             className="w-full mix-blend-hard-light lg:hidden block "
           />
         </div>
 
-        {/* movie? details */}
+        {/* actualMovie details */}
         <div className="absolute backdrop-blur-[1px] p-3 rounded-sm top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:w-[85%] w-full md:h-[85%] h-full bg-black/60 flex flex-col lg:flex-row items-center lg:gap-8 justify-evenly lg:justify-normal">
           {/* poster */}
           <div className=" lg:h-full lg:min-w-max lg:w-auto w-[95%] overflow-hidden mt-5 md:mt-0 ">
-            {movie?.poster_path ? (
+            {actualMovie?.poster_path ? (
               <img
-                src={`https://image.tmdb.org/t/p/original` + movie?.poster_path}
+                src={
+                  `https://image.tmdb.org/t/p/original` +
+                  actualMovie?.poster_path
+                }
                 alt=""
                 className="h-full object-contain rounded-sm hidden lg:block"
               />
@@ -93,10 +126,11 @@ const Detail = () => {
               ""
             )}
 
-            {movie?.backdrop_path ? (
+            {actualMovie?.backdrop_path ? (
               <img
                 src={
-                  `https://image.tmdb.org/t/p/original` + movie?.backdrop_path
+                  `https://image.tmdb.org/t/p/original` +
+                  actualMovie?.backdrop_path
                 }
                 alt=""
                 className=" max-h-[500px] h-full w-full object-cover rounded-sm lg:hidden"
@@ -109,27 +143,35 @@ const Detail = () => {
           <div className="w-full flex flex-col items-center md:items-start md:gap-8 gap-4 overflow-auto md:overflow-visible text-center md:text-left">
             {/* header */}
             <div className="">
-              {/* movie? title */}
+              {/* actualMovie title */}
               <h2 className="text-3xl font-bold">
-                {movie?.title}{" "}
+                {actualMovie?.title ? actualMovie?.title : actualMovie?.name}{" "}
                 <span className="font-normal">
                   {" "}
-                  ({movie?.release_date.slice(0, 4)}){" "}
+                  (
+                  {actualMovie?.release_date
+                    ? actualMovie?.release_date.slice(0, 4)
+                    : actualMovie?.first_air_date.slice(0, 4)}
+                  ){" "}
                 </span>
               </h2>
 
               {/* genres and runtime */}
               <div className="flex gap-1 mt-3 items-center flex-wrap justify-center md:justify-normal">
-                {movie?.genres.map((genre) => {
+                {actualMovie?.genres.map((genre) => {
                   return <Genre key={genre.id} genre={genre} />;
                 })}
-                <p className="ml-3">
-                  {" - "}
-                  {formattedRunTime.hr +
-                    "h " +
-                    formattedRunTime.mins +
-                    "m"}{" "}
-                </p>
+                {type === "movie" ? (
+                  <p className="ml-3">
+                    {" - "}
+                    {formattedRunTime.hr +
+                      "h " +
+                      formattedRunTime.mins +
+                      "m"}{" "}
+                  </p>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
 
@@ -153,13 +195,23 @@ const Detail = () => {
 
             {/* movie overview */}
             <div className=" text-center md:text-start px-3 md:px-0 ">
-              <p className="mb-2 italic text-gray-400"> {movie?.tagline} </p>
+              {actualMovie?.tagline ? (
+                <p className="mb-2 italic text-gray-400">
+                  {" "}
+                  {actualMovie?.tagline}{" "}
+                </p>
+              ) : (
+                ""
+              )}
               <div className="hidden md:block">
                 <h2 className="text-2xl font-medium text-white mb-2">
                   Overview
                 </h2>
-                {movie?.overview ? (
-                  <p className=" text-sm text-gray-300"> {movie?.overview} </p>
+                {actualMovie?.overview ? (
+                  <p className=" text-sm text-gray-300">
+                    {" "}
+                    {actualMovie?.overview}{" "}
+                  </p>
                 ) : (
                   <p className=" text-sm text-gray-300">
                     {" "}
@@ -174,10 +226,10 @@ const Detail = () => {
       </div>
 
       <div className=" w-[90%] mx-auto text-white md:hidden ">
-        {/* <p className="mb-2 italic text-gray-400"> {movie?.tagline} </p> */}
+        {/* <p className="mb-2 italic text-gray-400"> {actualMovie?.tagline} </p> */}
         <h2 className="text-2xl font-medium text-white mb-2">Overview</h2>
-        {movie?.overview ? (
-          <p className=" text-sm text-gray-300"> {movie?.overview} </p>
+        {actualMovie?.overview ? (
+          <p className=" text-sm text-gray-300"> {actualMovie?.overview} </p>
         ) : (
           <p className=" text-sm text-gray-300">
             {" "}
@@ -194,21 +246,18 @@ const Detail = () => {
       >
         {/* cast and crew */}
         <div className=" md:w-[70%] border-b pb-3 md:pb-0 md:border-0 border-gray-500 ">
-          <Cast id={movie?.id} type={"movie"} />
+          <Cast allCast={allCast} />
         </div>
         {/* somethings about movie */}
         <div className=" w-full ">
-          <AboutM movie={movie} />
+          <AboutM movie={actualMovie} />
         </div>
       </div>
 
       {/* recommendations  */}
-      {recommendedMovies?.length > 0 ? (
+      {recommendations?.length > 0 ? (
         <div className=" w-[90%] md:w-[85%] mx-auto border-b border-gray-500 pb-2">
-          <RecommendedMovies
-            recommendedMovies={recommendedMovies}
-            type={"movie"}
-          />
+          <RecommendedMovies recommendedMovies={recommendations} type={type} />
         </div>
       ) : (
         ""
@@ -228,7 +277,7 @@ const Detail = () => {
     <MNFPage />
   );
 
-  if (isLoading) {
+  if (MSLoaded || keysLoaded || RMSLoaded || castLoaded) {
     return <Loader />;
   }
 

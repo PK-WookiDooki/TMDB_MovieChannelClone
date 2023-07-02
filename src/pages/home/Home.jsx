@@ -6,7 +6,8 @@ import Hero from "./Hero";
 const Home = () => {
   const [movies, setMovies] = useState([]);
   const [series, setSeries] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isMLoading, setIsMLoading] = useState(true);
+  const [isSLoading, setIsSLoading] = useState(true);
   const [rand, setRand] = useState(Math.floor(Math.random() * 99));
   const latestMoviePoster = movies[rand]?.backdrop_path;
 
@@ -45,10 +46,10 @@ const Home = () => {
         const data = await getAllData("movie", i);
         allData = [...allData, data].flat();
       }
-      setIsLoading(false);
+      setIsMLoading(false);
       setMovies(allData);
     } catch (error) {
-      console.log(error);
+      throw new Error(error);
     }
   };
 
@@ -60,14 +61,14 @@ const Home = () => {
         const data = await getAllData("tv", i);
         allData = [...allData, data].flat();
       }
-      setIsLoading(false);
+      setIsSLoading(false);
       setSeries(allData);
     } catch (error) {
-      console.log(error);
+      throw new Error(error);
     }
   };
 
-  if (isLoading) {
+  if (isMLoading || isSLoading) {
     return <Loader />;
   }
 
