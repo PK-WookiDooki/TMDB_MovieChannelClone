@@ -5,6 +5,7 @@ export { default as Loader } from "./loader/Loader";
 
 //from cards
 export { default as MCard } from "./cards/MovieCard";
+export { default as ACard } from "./cards/AboutCard";
 
 // from miniComponents
 export { default as Rating } from "./miniComponents/Rating";
@@ -26,3 +27,6 @@ export { default as GList } from "./genres/GenresList";
 
 //recommendations
 export { default as RecommendedMovies } from "./recommendations/Recommendation";
+
+//input
+export { default as SInput } from "./input/SearchInput";

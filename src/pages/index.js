@@ -16,3 +16,6 @@ export { default as Movies } from "./movies/Movies";
 //detail
 export { default as Detail } from "./detail/Detail";
 export { default as Credits } from "./detail/Credits";
+
+//about
+export { default as About } from "./about/About";
