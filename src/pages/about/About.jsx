@@ -1,5 +1,5 @@
 import bgImage from "../../assets/images/deadpool.png";
-import { ACard } from "../../components";
+import { ACard, ContactForm } from "../../components";
 
 const About = () => {
     return (
@@ -33,7 +33,7 @@ const About = () => {
                 </p>
             </div>
 
-            <div className="mx-auto max-w-4xl px-3">
+            <div className="mx-auto max-w-4xl px-3 mb-5">
                 <h3 className="text-2xl font-bold mb-3">The TMDB advantage</h3>
                 <div className="flex flex-col gap-5">
                     <ACard
@@ -67,6 +67,10 @@ const About = () => {
                         }
                     />
                 </div>
+            </div>
+
+            <div className="mb-5">
+                <ContactForm />
             </div>
         </section>
     );

@@ -30,3 +30,6 @@ export { default as RecommendedMovies } from "./recommendations/Recommendation";
 
 //input
 export { default as SInput } from "./input/SearchInput";
+
+//contact
+export { default as ContactForm } from "./contact/Contact";
