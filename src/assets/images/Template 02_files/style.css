@@ -1,0 +1,764 @@
+@font-face {
+  font-family: "IBMPlexSans";
+  font-weight: 700;
+  src: url("../font/IBMPlexSans-Bold.ttf");
+}
+
+@font-face {
+  font-family: "IBMPlexSans";
+  font-weight: 500;
+  src: url("../font/IBMPlexSans-Medium.ttf");
+}
+
+@font-face {
+  font-family: "IBMPlexSans";
+  font-weight: 400;
+  src: url("../font/IBMPlexSans-Regular.ttf");
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "IBMPlexSans", sans-serif;
+  font-weight: 400;
+}
+
+body {
+  max-width: 1920px;
+}
+
+body,
+main,
+.container,
+header,
+.sec-three-content,
+.hero-blk h2,
+.hero-blk p,
+.hero-btn {
+  margin: 0 auto;
+}
+
+header {
+  max-width: 1360px;
+}
+
+a {
+  display: inline-block;
+}
+
+a,
+p,
+footer,
+input {
+  color: #616161;
+}
+
+.container {
+  max-width: 1110px;
+}
+
+
+/* menu toggle */
+.menu-toggle {
+  display: none;
+  position: relative;
+  width: 40px;
+  height: 30px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.toggle {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.toggle,
+.toggle::before,
+.toggle::after {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #141414;
+  transition: 0.4s ease all;
+  border-radius: 8px;
+}
+
+.toggle::before,
+.toggle::after {
+  content: "";
+}
+
+.toggle::before {
+  top: -15px;
+}
+
+.toggle::after {
+  top: 15px;
+}
+
+.menu-toggle:hover .toggle{
+  height: 0;
+}
+
+.menu-toggle:hover .toggle::before{
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.menu-toggle:hover .toggle::after{
+  top: 0;
+  transform: rotate(-45deg);
+}
+/* end menu toggle */
+
+.sec-mv {
+  padding: 36px 0 157px 0;
+  background: url('../images/img_herobg.jpg') no-repeat center/cover;
+}
+
+.logo,
+.gnav,
+li,
+.sec-two-content,
+.contact,
+.address,
+.footer-logo {
+  float: left;
+}
+
+.navbar {
+  margin-top: 10px;
+}
+
+.navbar,
+.contact-btn,
+.sec-two-image,
+.sec-three-content li:nth-child(2n),
+.contact-info,
+.contact-form,
+.footer-nav, 
+.menu-toggle {
+  float: right;
+}
+
+p,
+input,
+a,
+.card-title h3 {
+  font-size: 16px;
+}
+
+.navbar a,
+.sec-two-content a,
+.common-btn,
+.common-tlt,
+.sec-three-content p,
+.sec-three-heading h3,
+.card-title h3,
+.card-info h3,
+.menu-card-tlt,
+.contact-detail h4 {
+  font-weight: 700;
+}
+
+.navbar ul a,
+.sec-two-content a,
+.sec-three-content p,
+.sec-two-content p,
+.card-title h3,
+.card-info h3,
+.menu-card-tlt,
+.contact-detail h4 {
+  color: #141414;
+}
+
+.gnav {
+  margin-top: 9px;
+}
+
+.gnav li+li {
+  margin-left: 60px;
+}
+
+.gnav a {
+  padding: 2px 0;
+  letter-spacing: -0.015px;
+}
+
+.gnav a:hover,
+.sec-two-content a:hover,
+.sub-menu a:hover {
+  transition: 0.3s;
+  opacity: 0.8;
+}
+
+.common-btn {
+  padding: 7.5px 24px;
+  border: 1px solid #ff8364;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.common-btn,
+.sec-four-card,
+.map,
+.contact-detail,
+input {
+  border-radius: 8px;
+}
+
+.common-btn,
+.card-info h3::before {
+  background-color: #ff8364;
+}
+
+.contact-btn,
+.contact-detail p {
+  letter-spacing: -0.15px;
+}
+
+.contact-btn,
+.sec-three-heading h3,
+.card-title p,
+.contact-detail h4 {
+  text-transform: uppercase;
+}
+
+.contact-btn {
+  margin-top: 2px;
+  margin-left: 58px;
+}
+
+.common-btn:hover,
+.sec-two-content a,
+.sec-three-heading h3,
+.contact-detail .email p {
+  color: #ff8364;
+}
+
+.common-btn:hover,
+.contact-detail {
+  background-color: #fff;
+}
+
+.hero-blk {
+  margin-top: 106px;
+}
+
+.hero-blk,
+.sec-three-heading,
+.sec-four,
+.sec-five {
+  text-align: center;
+}
+
+.hero-blk h2 {
+  font-size: 64px;
+  font-weight: 500;
+  max-width: 650px;
+}
+
+.hero-blk h2,
+.card-title {
+  line-height: 1.2;
+}
+
+.hero-blk h2,
+.sec-three-content,
+form {
+  margin-top: 32px;
+}
+
+.hero-blk p {
+  line-height: 1.6;
+  color: #efefef;
+  max-width: 550px;
+}
+
+.hero-blk p,
+.footer-nav {
+  margin-top: 5px;
+}
+
+.hero-blk p,
+.menu-card-tlt,
+.card-info h3,
+.sec-three-content p {
+  font-size: 20px;
+}
+
+.hero-btn {
+  display: block;
+  width: fit-content;
+  margin-top: 26px;
+  padding: 10px 40px;
+}
+
+.hero-btn,
+.desc,
+.send-btn {
+  font-size: 18px;
+}
+
+/* second-section */
+.sec-two {
+  padding: 107px 0 96px 0;
+}
+
+.sec-two,
+.sec-four-card,
+input {
+  background-color: #f3f3f3;
+}
+
+.common-tlt {
+  padding: 6px 0;
+  font-size: 40px;
+}
+
+.common-tlt,
+.sec-three-content,
+.card-title h3 {
+  text-transform: capitalize;
+
+}
+
+.sec-two-content p {
+  margin: 27px 0 30px 0;
+  max-width: 635px;
+}
+
+.sec-two-content p,
+.form-tlt {
+  font-size: 36px;
+}
+
+.sec-two-content p,
+.card-info h3,
+.card-info p,
+.contact-detail .address p {
+  line-height: 1.4;
+}
+
+.sec-two-content a {
+  padding: 2px 30px 2px 0;
+  letter-spacing: 0.4px;
+}
+
+.sec-two-content a,
+.contact,
+.sec-three-content li,
+.card-info h3 {
+  position: relative;
+}
+
+.sec-two-content a::after {
+  top: 50%;
+  right: 0;
+  width: 14px;
+  height: 14px;
+  background: url("../images/ico_arrow.png") no-repeat center/contain;
+  content: '';
+  transform: translateY(-50%);
+}
+
+.sec-two-content a::after,
+.card-info h3::before,
+.contact-detail,
+.sec-three-content li::before {
+  position: absolute;
+}
+
+.sec-two-image {
+  margin-top: 33px;
+}
+
+.sec-two-image .img-mobile{
+  display: none;
+}
+
+/* section-three */
+.sec-three {
+  padding: 85px 0 105px 0;
+}
+
+.sec-three,
+.sec-six {
+  border-bottom: 1px solid #d9d9d9;
+}
+
+
+
+.sec-three-heading h3 {
+  margin-top: -3px;
+  padding: 4px 0;
+  font-size: 25px;
+  letter-spacing: 1px;
+}
+
+.sec-three-heading h3,
+.sub-menu li {
+  line-height: 1.25;
+}
+
+.sec-three-content {
+  padding-left: 10px;
+  max-width: 974px;
+}
+
+.sec-three-content li {
+  display: block;
+  width: 45%;
+  line-height: 1.325;
+  margin-top: 34px;
+}
+
+.sec-three-content p {
+  margin-left: 65px;
+  max-width: 400px;
+}
+
+.sec-three-content p,
+.contact-detail,
+input {
+  width: 100%;
+}
+
+.sec-three-content li::before {
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  background: url('../images/ico_star.jpg') no-repeat center/contain;
+}
+
+.card-info h3::before,
+.sec-three-content li::before {
+  content: "";
+}
+
+/* section-four */
+.sec-four {
+  padding: 80px 0 50px 0;
+}
+
+.sec-four ul {
+  margin-top: 42px;
+}
+
+.sec-four-card {
+  max-width: 255px;
+}
+
+.sec-four-card,
+.sec-five-card {
+  margin-bottom: 30px;
+}
+
+.sec-four-card:not(:nth-of-type(4n)),
+.sec-five-card:not(:nth-of-type(3n)),
+.menu-card:not(:last-of-type) {
+  margin-right: 30px;
+}
+
+.card-title {
+  padding: 35px 0 30px 0;
+}
+
+.card-title p,
+.contact-detail h4,
+.footer-log,
+.footer-logo p {
+  font-size: 12px;
+}
+
+.card-title h3 {
+  margin-top: 3px;
+}
+
+/* section-five */
+.sec-five {
+  padding: 80px 0 50px 0;
+  background-color: #fcfcfc;
+}
+
+.sec-five ul {
+  margin-top: 50px;
+}
+
+.sec-five-card {
+  max-width: 350px;
+}
+
+.desc {
+  line-height: 1.65;
+}
+
+.phone,
+.desc {
+  margin-top: 20px;
+}
+
+
+.card-info {
+  margin-top: 50px;
+}
+
+.card-info h3 {
+  padding-top: 10px;
+}
+
+.card-info h3::before {
+  top: -2px;
+  width: 65px;
+  height: 4px;
+}
+
+
+
+.card-info h3::before,
+.contact-detail {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.card-info p {
+  margin-top: 1px;
+}
+
+/* section-six */
+.sec-six {
+  padding: 100px 0 97px 0;
+}
+
+.map {
+  width: 605px;
+  height: 490px;
+}
+
+.map,
+input {
+  border: none;
+}
+
+.contact-detail {
+  bottom: 35px;
+  padding: 30px 30px 35px 30px;
+  max-width: 545px;
+}
+
+.contact-detail>div {
+  width: 225px;
+}
+
+.contact-detail .address p {
+  letter-spacing: -0.05px;
+}
+
+.contact-detail h4 {
+  line-height: 1.8;
+  letter-spacing: -0.3px;
+}
+
+.contact-detail p {
+  line-height: 1.28;
+}
+
+/* section six contact-form */
+
+.contact-form {
+  max-width: 445px;
+}
+
+.contact-form p {
+  margin-top: -9px;
+}
+
+.contact-form p,
+.form-tlt {
+  line-height: 1.45;
+}
+
+.form-tlt {
+  letter-spacing: -0.5px;
+}
+
+form {
+  font-family: "IBMPlexSans";
+  max-width: 320px;
+}
+
+form input {
+  margin-bottom: 32px;
+  padding: 7.5px 20px;
+  outline: none;
+}
+
+.send-btn {
+  margin-top: -4px;
+  padding: 10px 47px;
+}
+
+/*footer*/
+
+footer {
+  padding: 70px 0 84px 0;
+}
+
+.footer-logo {
+  max-width: 233px;
+}
+
+.footer-logo p {
+  line-height: 1.5;
+  margin-top: 29px;
+}
+
+.menu-card-tlt {
+  line-height: 1.35;
+  margin-bottom: 6px;
+}
+
+.sub-menu li {
+  float: none;
+}
+
+.sub-menu li:not(:last-child) {
+  margin-bottom: 14px;
+}
+
+.menu-card {
+  width: 160px;
+}
+
+
+/* for tablet */
+
+@media screen and (min-width: 768px) and (max-width: 1100px) {
+  header {
+    max-width: 89.58vw;
+  }
+
+  .container {
+    max-width: 89.58vw;
+  }
+
+  .menu-toggle{
+    display: block;
+  }
+
+  .gnav li+li {
+    margin-left: 0;
+  }
+
+  .gnav a {
+    padding: 0.26vw 0;
+  }
+
+  .common-btn{
+  padding: 0.98vw 3.13vw;
+  }
+
+  .common-tlt {
+    padding: 0.78vw 0;
+    font-size: 5.21vw;
+  }
+
+  .contact-btn {
+    margin-top: 2px;
+    margin-left: 0;
+  }
+
+  p,
+input,
+a,
+.card-title h3 {
+  font-size: 2.08vw;
+}
+
+.hero-blk {
+  margin-top: 14.06vw;
+}
+
+  .navbar, .sec-two-image .img-desktop{
+    display: none;
+  }
+
+  .sec-mv {
+    padding: 4.69vw 0 20.44vw 0;
+  }
+
+  .sec-two {
+    padding: 13.93vw 0 12.5vw 0;
+  }
+
+  .sec-two-content p{
+    margin: 3.52vw 0 3.91vw 0;
+    max-width: 100%;
+  }
+
+  .sec-two-content p,
+.form-tlt {
+  font-size: 4.69vw;
+}
+
+.sec-two-content a {
+  padding: 0.26vw 3.91vw 0.26vw 0;
+  letter-spacing: 0.05vw;
+}
+
+.sec-two-content a::after {
+  width: 1.82vw;
+  height: 1.82vw;
+}
+
+  .sec-two-image{
+    width: 100%;
+    margin-top: 9.11vw;
+  }
+
+  .sec-two-image .img-mobile{
+    display: block;
+    margin: 0 auto;
+  }
+
+  .sec-three {
+    padding: 10.42vw 0 9.11vw 0;
+  }
+
+  .sec-three-heading h3 {
+    margin-top: -0.39vw;
+    padding: 0.52vw 0;
+    font-size: 3.26vw;
+    letter-spacing: 0.13vw;
+  }
+
+  .sec-three-content {
+    padding-left: 0;
+    max-width: 100%;
+  }
+
+  .sec-three-content li {
+    width: 100%;
+    margin-top: 4.04vw;
+  }
+
+  .sec-three-content p {
+    margin-left: 8.46vw;
+    max-width: 100%;
+  }
+
+  .sec-three-content li::before {
+        top: 50%;
+        transform: translateY(-50%);
+      }
+}
+
+/* for mobile */
+@media screen and (max-width:767.9px) {
+  .menu-toggle{
+    display: block;
+  }
+}

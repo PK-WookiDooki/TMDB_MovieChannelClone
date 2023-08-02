@@ -47,7 +47,7 @@ const Credits = ({ type }) => {
   }
 
   return (
-    <section className=" w-full mt-5 overflow-hidden">
+    <section className=" w-full overflow-hidden">
       <div className="py-3 w-full bg-slate-500">
         <div className="w-[85%] mx-auto">
           <Link

@@ -38,7 +38,7 @@ const Contact = () => {
             <div
                 className={` model ${
                     model ? " scale-100" : " scale-0"
-                } fixed w-full h-full top-0 left-0 bg-black/40 z-10 flex items-center justify-center p-5 md:p-0 `}
+                } fixed w-full h-full top-0 left-0 bg-black/40 z-10 flex items-center justify-center p-5 md:p-0 duration-300 `}
             >
                 <div className=" max-w-xl w-full bg-white rounded-sm p-3 text-black">
                     <div className="flex items-center justify-between mb-3 pb-2 border-b border-gray-800">
