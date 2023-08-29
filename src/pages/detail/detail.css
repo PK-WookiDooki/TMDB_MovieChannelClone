@@ -1,0 +1,7 @@
+@tailwind components;
+
+@layer components{
+  .detail-wrapper{
+    @apply absolute backdrop-blur-[1px] p-3 rounded-sm top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:w-[85%] w-full md:h-[85%] h-full bg-black/60 flex flex-col lg:flex-row items-center lg:gap-8 justify-evenly lg:justify-normal
+  ;}
+}

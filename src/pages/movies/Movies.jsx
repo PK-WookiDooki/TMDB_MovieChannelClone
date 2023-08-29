@@ -9,8 +9,6 @@ const Movies = () => {
     const [movies, setMovies] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    // console.log(movies[0]);
-
     useEffect(() => {
         getMovies();
     }, []);
@@ -40,11 +38,11 @@ const Movies = () => {
     }
 
     return (
-        <div className=" w-full md:w-[85%] mx-auto flex flex-col gap-5 md:flex-row items-start py-5 ">
+        <div className=" min-h-screen w-full md:w-[85%] mx-auto flex flex-col gap-5 md:flex-row py-5 items-start">
             <GList movies={movies} genres={genres} type={"movie"} />
 
             {filteredMovies?.length > 0 ? (
-                <div className="flex flex-row flex-wrap gap-3 justify-center w-full my-auto">
+                <div className="flex flex-row flex-wrap gap-3 w-full justify-center">
                     {filteredMovies?.map((movie) => {
                         return <MCard key={movie.id} movie={movie} path={""} />;
                     })}

@@ -41,10 +41,10 @@ const Series = () => {
     }
 
     return (
-        <div className="w-full md:w-[85%] mx-auto flex flex-col gap-5 md:flex-row items-start py-5 ">
+        <div className="min-h-screen items-start w-full md:w-[85%] mx-auto flex flex-col gap-5 md:flex-row py-5 ">
             <GList genres={genres} movies={series} type={"tv"} />
             {filteredSeries?.length > 0 ? (
-                <div className=" flex flex-row flex-wrap gap-3 justify-center w-full my-auto ">
+                <div className=" flex flex-row flex-wrap gap-3 w-full justify-center ">
                     {filteredSeries?.map((show) => {
                         return <MCard key={show.id} movie={show} path={""} />;
                     })}
