@@ -1,28 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
-import cookie from "cookiejs";
 
 export const moviesSlice = createSlice({
   name: "movies",
   initialState: {
-    filteredMovies: [],
-    keyword: "",
-    filteredSeries: [],
+    mGenreId : "all",
+    sGenreId : "all"
   },
   reducers: {
-    addMovies: (state, { payload }) => {
-      state.filteredMovies = payload;
+    setMGenreId : (state, {payload}) => {
+      state.mGenreId = payload
     },
 
-    addSeries: (state, { payload }) => {
-      state.filteredSeries = payload;
-    },
-
-    setKeyword: (state, { payload }) => {
-      state.keyword = payload;
-      cookie.set("keyword", state.keyword);
-    },
+    setSGenreId : (state, {payload}) => {
+      state.sGenreId = payload
+    }
   },
 });
 
-export const { addMovies, setKeyword, addSeries } = moviesSlice.actions;
+export const {setMGenreId, setSGenreId } = moviesSlice.actions;
 export default moviesSlice.reducer;

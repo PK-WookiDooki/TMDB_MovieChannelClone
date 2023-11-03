@@ -1,53 +1,58 @@
-import { useEffect, useState } from "react";
-import { getAllData } from "../../features/apis/getData";
-import { GList, Loader, MCard } from "../../components";
-import { useGetTVGenresQuery } from "../../features/apis/tvApi";
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { Loader, MCard } from "../../components";
+import {useGetAllPopularSeriesQuery, useGetTVGenresQuery} from "../../features/apis/tvApi";
+import {useDispatch, useSelector} from "react-redux";
 import errImage from "../../assets/images/error.png";
+import {Pagination, Select} from "antd";
+import {setSGenreId} from "../../features/services/moviesSlice.js";
 
 const Series = () => {
-    const [series, setSeries] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
 
-    // console.log(movies[0]);
+    const [page, setPage] = useState(1)
+    const {sGenreId} = useSelector(state => state.movies)
+    const {data : pSeries, isLoading : isSLoading} = useGetAllPopularSeriesQuery({page, sGenreId})
 
-    useEffect(() => {
-        getMovies();
-    }, []);
-
-    const { data, isLoading: isNotReady } = useGetTVGenresQuery();
+    const { data, isLoading: isGLoading } = useGetTVGenresQuery();
     const genres = data?.genres;
 
-    const { filteredSeries } = useSelector((state) => state.movies);
-    // console.log(filteredSeries);
+    const totalResults = pSeries?.total_results > 2000 ? 2000 : pSeries?.total_results
 
-    const getMovies = async () => {
-        try {
-            let allData = [];
+    const dispatch = useDispatch();
 
-            for (let i = 1; i <= 5; i++) {
-                const data = await getAllData("tv", i);
-                allData = [...allData, data].flat();
-            }
-            setIsLoading(false);
-            setSeries(allData);
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    const onGenreIdChange = (value) => {
+        dispatch(setSGenreId(value))
+        setPage(1)
+    }
 
-    if (isLoading || isNotReady) {
+    if (isSLoading || isGLoading) {
         return <Loader />;
     }
 
     return (
-        <div className="min-h-screen items-start w-full md:w-[85%] mx-auto flex flex-col gap-5 md:flex-row py-5 ">
-            <GList genres={genres} movies={series} type={"tv"} />
-            {filteredSeries?.length > 0 ? (
-                <div className=" flex flex-row flex-wrap gap-3 w-full justify-center ">
-                    {filteredSeries?.map((show) => {
-                        return <MCard key={show.id} movie={show} path={""} />;
-                    })}
+        <div className="min-h-screen items-start w-full md:w-[85%] mx-auto flex flex-col gap-5 py-5 ">
+
+            <div className={" p-5 rounded bg-slate-800 max-w-[90%] md:max-w-full mx-auto w-full "} >
+                <label htmlFor={"genresBox"} className={" text-lg font-medium block mb-2 "} >
+                    Genres List
+                </label>
+                <Select id={"genresBox"} className={" w-full !font-sans "} placeholder={"Select Genre"} onChange={onGenreIdChange} defaultValue={sGenreId}  >
+                    <Select.Option value={"all"} className={" !font-sans"} > All </Select.Option>
+                    {
+                        genres?.map(genre => {
+                            return <Select.Option value={genre?.id} key={genre?.id} className={" !font-sans"} > {genre?.name} </Select.Option>
+                        })
+                    }
+                </Select>
+            </div>
+
+            {pSeries?.results?.length > 0 ? (
+                <div>
+                    <div className=" flex flex-row flex-wrap gap-3 w-full justify-center ">
+                        {pSeries?.results?.map((show) => {
+                            return <MCard key={show.id} movie={show} path={""} />;
+                        })}
+                    </div>
+                    <Pagination total={totalResults} pageSize={pSeries?.results?.length} current={page} onChange={(value) => setPage(value)} className={ "flex items-center justify-center mt-5"} showSizeChanger={false} responsive={true} showLessItems={true}   />
                 </div>
             ) : (
                 <div className=" bg-slate-800 w-full text-center py-5 rounded-sm h-full flex items-center justify-center mx-auto ">

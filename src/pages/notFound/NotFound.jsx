@@ -13,7 +13,7 @@ const NotFound = () => {
                 <h2 className="text-3xl font-bold">Sorry</h2>
                 <h2 className="text-xl font-medium">
                     {" "}
-                    The page you were looking for is currently unavailable!{" "}
+                    The page you were looking for is not found!{" "}
                 </h2>
                 <Link
                     to={".."}

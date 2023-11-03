@@ -1,49 +1,23 @@
-import cookie from "cookiejs";
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { getAllData } from "../../features/apis/getData";
+import {useState } from "react";
 import { Loader, MCard } from "../../components";
-import { Link } from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
+import {useGetSearchedResultsQuery} from "../../features/apis/moviesApi.js";
+import {Pagination} from "antd";
 
 const SearchedMovies = () => {
-    const [search, setSearch] = useState("");
-    const [movies, setMovies] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const { keyword } = useSelector((state) => state.movies);
-    const usedKeyword = keyword ? keyword : search;
+    const query = useLocation().search;
+    const searchParams = new URLSearchParams(query)
 
-    useEffect(() => {
-        const keyword = cookie.get("keyword") ? cookie.get("keyword") : null;
-        setSearch(keyword);
-        getMovies();
-    }, []);
+    const searchedKeyword = searchParams.get("query")
+    const [page, setPage] = useState(1)
 
-    const getMovies = async () => {
-        try {
-            let allData = [];
+    const {data : searchedData, isLoading, isFetching} = useGetSearchedResultsQuery({keyword : searchedKeyword , page})
+    const searchedResults = searchedData?.results
 
-            for (let i = 1; i <= 5; i++) {
-                const allMovies = await getAllData("movie", i);
-                const allSeries = await getAllData("tv", i);
-                allData = [...allData, allMovies, allSeries].flat();
-            }
-            setIsLoading(false);
-            setMovies(allData);
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    const totalResults = searchedData?.total_results > 500 ? 500 : searchedData?.total_results
 
-    const searchedMovies = movies?.filter(
-        (movie) =>
-            movie.title?.toLowerCase().includes(usedKeyword.toLowerCase()) ||
-            movie.name?.toLowerCase().includes(usedKeyword.toLowerCase())
-    );
-
-    // console.log(searchedMovies);
-
-    if (isLoading) {
+    if (isLoading || isFetching) {
         return <Loader />;
     }
 
@@ -59,26 +33,25 @@ const SearchedMovies = () => {
     // movie has (release_date) and series has (first_air_date)
     const detailPath = (movie) => {
         const path = movie.release_date ? "/movies/" : "/tv/";
-
         return path;
     };
 
     return (
-        <section className="w-full">
-            {searchedMovies?.length > 0 ? (
-                <div className="">
+        <section className="w-full ">
+            {searchedResults?.length > 0 ? (
+                <div className="py-5">
                     <div className=" py-5 bg-slate-500 w-full">
                         <div className="w-[85%] mx-auto">
                             <h2 className="text-2xl font-medium mb-3">
-                                {searchedMovies
-                                    ? `Results For '${usedKeyword}'`
+                                {searchedResults
+                                    ? `Results For '${searchedKeyword}'`
                                     : ""}
                             </h2>
                             {backLink}
                         </div>
                     </div>
                     <div className="flex flex-row flex-wrap gap-3 items-center justify-center w-full md:w-[85%] mx-auto py-5">
-                        {searchedMovies?.map((movie) => {
+                        {searchedResults?.map((movie) => {
                             return (
                                 <MCard
                                     key={movie.id}
@@ -88,15 +61,16 @@ const SearchedMovies = () => {
                             );
                         })}
                     </div>
+                    <Pagination total={totalResults} pageSize={20} current={page} onChange={(value) => setPage(value)} className={ "flex items-center justify-center mt-5"} showSizeChanger={false}  responsive={true} showLessItems={true}/>
                 </div>
             ) : (
                 <div
                     className=" bg-slate-800  w-full
            flex flex-col gap-3 items-center justify-center p-5"
                 >
-                    <h2 className="text-xl font-medium text-center">
+                    <h2 className=" text-lg text-center">
                         {" "}
-                        There is no movie with {`'${usedKeyword}' `} !{" "}
+                        There is no movies or series with <span className={` font-medium text-xl italic `} >{`'${searchedKeyword}' `}</span> !{" "}
                     </h2>
                     {backLink}
                 </div>

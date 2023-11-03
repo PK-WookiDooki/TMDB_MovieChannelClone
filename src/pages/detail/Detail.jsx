@@ -3,7 +3,6 @@ import { Link, useParams } from "react-router-dom";
 import {
     AboutM,
     Cast,
-    Genre,
     Loader,
     Rating,
     RecommendedMovies,
@@ -26,6 +25,8 @@ import {
     useGetTVRecommendationsQuery,
 } from "../../features/apis/tvApi";
 import "./detail.css";
+import noImg from "../../assets/images/img_noImage.svg"
+import noImgBd from "../../assets/images/no-image.png"
 
 const Detail = ({ type }) => {
     const [active, setActive] = useState(false);
@@ -53,10 +54,6 @@ const Detail = ({ type }) => {
             : useGetTVCreditsByIDQuery(id);
 
     const allCast = credits?.cast.slice(0, 10);
-    // console.log(allCast)
-
-    //   const actualMovie = type === "movie" ? movie : show;
-    //   const actualKeys = type === "movie" ? mKeys : sKeys;
 
     const officialKey = actualKeys?.results.find(
         (key) =>
@@ -74,6 +71,14 @@ const Detail = ({ type }) => {
         ? getFormattedRating(actualMovie?.vote_average)
         : "";
 
+    // poster
+    const poster = actualMovie?.poster_path == null ? noImg : `https://image.tmdb.org/t/p/original` +
+        actualMovie?.poster_path
+
+    // backdrop
+    const backdrop = actualMovie?.poster_path == null ? noImgBd : `https://image.tmdb.org/t/p/original` +
+        actualMovie?.backdrop_path
+
     // content
     const content = actualMovie ? (
         <div className="font-[Poppins] flex flex-col gap-7 w-full select-none pb-3">
@@ -90,24 +95,16 @@ const Detail = ({ type }) => {
                 />
             </div>
 
-            <div className="  lg:h-[600px] w-full relative">
-                <div className="overflow-hidden h-full">
-                    {/* backdrop poster */}
+            <div className={`lg:h-[600px] w-full relative`}>
+                <div className={`overflow-hidden h-full`}>
+                     {/*backdrop poster*/}
                     <img
-                        src={
-                            `https://image.tmdb.org/t/p/original` +
-                            actualMovie?.backdrop_path
-                        }
-                        alt=""
-                        className="w-full mix-blend-hard-light hidden lg:block "
+                        src={backdrop}
+                        className=" w-full mix-blend-hard-light hidden lg:block object-fill "
                     />
 
                     <img
-                        src={
-                            `https://image.tmdb.org/t/p/original` +
-                            actualMovie?.poster_path
-                        }
-                        alt=""
+                        src={poster}
                         className="w-full mix-blend-hard-light lg:hidden block "
                     />
                 </div>
@@ -116,31 +113,16 @@ const Detail = ({ type }) => {
                 <div className="detail-wrapper">
                     {/* poster */}
                     <div className=" lg:h-full lg:min-w-max lg:w-auto w-[95%] overflow-hidden mt-5 md:mt-0 ">
-                        {actualMovie?.poster_path ? (
+
                             <img
-                                src={
-                                    `https://image.tmdb.org/t/p/original` +
-                                    actualMovie?.poster_path
-                                }
-                                alt=""
+                                src={poster}
                                 className="h-full object-contain rounded-sm hidden lg:block"
                             />
-                        ) : (
-                            ""
-                        )}
-
-                        {actualMovie?.backdrop_path ? (
                             <img
-                                src={
-                                    `https://image.tmdb.org/t/p/original` +
-                                    actualMovie?.backdrop_path
-                                }
-                                alt=""
+                                src={backdrop}
                                 className=" max-h-[500px] h-full w-full object-cover rounded-sm lg:hidden"
                             />
-                        ) : (
-                            ""
-                        )}
+
                     </div>
 
                     <div className="w-full flex flex-col items-center md:items-start md:gap-8 gap-4 overflow-auto md:overflow-visible text-center md:text-left">
@@ -168,7 +150,7 @@ const Detail = ({ type }) => {
                             <div className="flex gap-1 mt-3 items-center flex-wrap justify-center md:justify-normal">
                                 {actualMovie?.genres.map((genre) => {
                                     return (
-                                        <Genre key={genre.id} genre={genre} />
+                                        <p key={genre?.id}> {genre?.name} </p>
                                     );
                                 })}
                                 {type === "movie" ? (

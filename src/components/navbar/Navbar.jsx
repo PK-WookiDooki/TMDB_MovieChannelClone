@@ -1,33 +1,11 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import NLink from "../links/NLink";
 import { RxCross1, RxHamburgerMenu } from "react-icons/rx";
-import SearchInput from "../input/SearchInput";
 import Account from "../account/Account";
-import { useDispatch } from "react-redux";
-import { setKeyword } from "../../features/services/moviesSlice";
 
 const Navbar = () => {
     const [menu, setMenu] = useState(false);
-    const [search, setSearch] = useState("");
-
-    const nav = useNavigate();
-    const dispatch = useDispatch();
-
-    const handleChange = (e) => {
-        setSearch(e.target.value);
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (!search.trim()) {
-            return nav("/");
-        }
-        nav("search");
-        setMenu(false);
-        dispatch(setKeyword(search));
-        setSearch("");
-    };
 
     const handleMenu = () => {
         setMenu(!menu);
@@ -72,9 +50,9 @@ const Navbar = () => {
                         sm={true}
                     />
                 </div>
-                <div className="mt-auto">
-                    <Account sm={true} />
-                </div>
+                {/*<div className="mt-auto">*/}
+                {/*    <Account sm={true} />*/}
+                {/*</div>*/}
             </div>
         </div>
     );
@@ -99,16 +77,16 @@ const Navbar = () => {
                         <NLink path={"about"} title={"About Us"} />
                     </ul>
 
-                    {/* search box */}
-                    <div className=" hidden lg:flex">
-                        <Account />
-                    </div>
+
+                    {/*<div className=" hidden lg:flex">*/}
+                    {/*    <Account />*/}
+                    {/*</div>*/}
 
                     {/* this's a background when menu is activated */}
                     <div
                         className={` ${
                             menu ? "block lg:hidden" : "hidden"
-                        }  fixed h-screen top-0 left-0 bg-black/40 w-full z-[3]`}
+                        }  fixed h-screen top-0 left-0 bg-slate-800/60 w-full z-[3]`}
                     ></div>
 
                     {/* menu trigger button */}

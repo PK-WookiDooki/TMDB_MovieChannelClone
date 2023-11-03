@@ -1,14 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { moviesApi } from "./apis/moviesApi";
 import moviesSlice from "./services/moviesSlice";
 import { tvApi } from "./apis/tvApi";
+import {baseApi} from "./apis/baseApi.js";
 
 export const store = configureStore({
   reducer: {
     movies: moviesSlice,
-    [moviesApi.reducerPath]: moviesApi.reducer,
     [tvApi.reducerPath]: tvApi.reducer,
+    [baseApi.reducerPath] : baseApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(moviesApi.middleware, tvApi.middleware),
+    getDefaultMiddleware().concat( tvApi.middleware, baseApi.middleware),
 });

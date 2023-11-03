@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
+import noImg from "../../assets/images/img_noImage.svg"
 
 const MovieCard = ({ movie, path }) => {
-    const image = `https://image.tmdb.org/t/p/original${movie.poster_path}`;
+    const image = movie?.poster_path == null ? noImg : `https://image.tmdb.org/t/p/original${movie.poster_path}`;
 
     return (
         <Link
             to={`${path}${movie.id}`}
-            className="max-w-[150px] min-w-[150px] group h-fit"
+            className="max-w-[150px] min-w-[150px] group h-fit self-stretch "
         >
             <div className=" rounded-sm overflow-hidden">
                 {image ? (

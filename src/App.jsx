@@ -10,6 +10,7 @@ import {
     Credits,
     About,
 } from "./pages";
+import {SGuard} from "./components/index.js";
 
 const App = () => {
     return (
@@ -19,7 +20,9 @@ const App = () => {
                     <Route index element={<Home />} />
 
                     {/* search route */}
-                    <Route path="search" element={<SMovies />} />
+                    <Route path="search" element={<SGuard>
+                        <SMovies />
+                    </SGuard>} />
 
                     {/* tv routes */}
                     <Route path="tv">

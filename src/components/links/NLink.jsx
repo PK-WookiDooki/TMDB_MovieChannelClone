@@ -6,10 +6,10 @@ const NLink = ({ path, title, sm, handleChange }) => {
         <NavLink
             onClick={handleChange}
             to={path}
-            className={` nav-link py-1 ${
+            className={` nav-link relative z-0 py-1 ${
                 sm
                     ? "text-slate-600 hover:text-slate-900 border-l-4 border-transparent px-2 hover:border-black hover:bg-black/30"
-                    : "text-slate-300 hover:text-white border-b-2 border-transparent hover:border-white"
+                    : "text-slate-300 hover:text-white border-b border-transparent hover:border-white px-2 "
             }   `}
         >
             {title}

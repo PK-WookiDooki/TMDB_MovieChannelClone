@@ -7,3 +7,24 @@
 * {
   box-sizing: border-box;
 }
+
+/*pagination*/
+.ant-pagination :where(.ant-pagination-prev, .ant-pagination-next) button, .ant-pagination .ant-pagination-item a, .ant-pagination .ant-pagination-item-ellipsis{
+  color: #FFF !important;
+  font-family: "Montserrat", "sans-serif" !important;
+  font-size: 15px !important;
+}
+
+.ant-pagination :where(.ant-pagination-prev, .ant-pagination-next), .ant-pagination .ant-pagination-item, .ant-pagination :where(.ant-pagination-prev, .ant-pagination-next) button{
+  min-width: 35px !important;
+  height: 35px !important;
+  padding: 0 4px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none !important;
+}
+
+.ant-pagination .ant-pagination-item-active a{
+  color : #1a73e8 !important;
+}

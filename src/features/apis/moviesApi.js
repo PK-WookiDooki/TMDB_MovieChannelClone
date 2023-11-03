@@ -1,20 +1,38 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import {baseApi} from "./baseApi.js";
 
+const API_KEY = "api_key=4066b11ad50ffb347b51dfb90e37e3dd";
 const token =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MDY2YjExYWQ1MGZmYjM0N2I1MWRmYjkwZTM3ZTNkZCIsInN1YiI6IjY0MWZjYmZjNmEzNDQ4MDA3YmI1NTZlZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1kfclglIVLvzCYr2LsD2gEwJK1v37fiCzpewCgi6SnE";
 
-export const moviesApi = createApi({
-  reducerPath: "moviesApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://api.themoviedb.org/3/" }),
-  tagTypes: ["moviesApi"],
+export const moviesApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+
+    getAllPopularMovies : builder.query({
+      query : ({page, mGenreId}) => ({
+        // url : `movie/popular?language=en-US&${API_KEY}&page=${page}`,
+        url : `discover/movie?language=en-US&${API_KEY}&page=${page}&with_genres=${mGenreId}&sort_by=popularity.desc`,
+        method : "GET",
+      }),
+      providesTags : ["movies"],
+      invalidatesTags: ["movies"]
+    }),
+
+    getSearchedResults : builder.query({
+    query : ({keyword, page}) => ({
+      url : `https://api.themoviedb.org/3/search/multi?query=${keyword}&include_adult=false&language=en-US&page=${page}`,
+      method: "GET",
+      headers: { authorization: `Bearer ${token}` },
+    }),
+    providesTags: ["movies", "series"]
+  }),
+
     getMovieByID: builder.query({
       query: (id) => ({
         url: `movie/${id}?language=en-US`,
         method: "GET",
         headers: { authorization: `Bearer ${token}` },
       }),
-      providesTags: ["moviesApi"],
+      providesTags: ["movies"],
     }),
 
     getMovieKeys: builder.query({
@@ -23,7 +41,7 @@ export const moviesApi = createApi({
         method: "GET",
         headers: { authorization: `Bearer ${token}` },
       }),
-      providesTags: ["moviesApi"],
+      providesTags: ["movies"],
     }),
 
     getMovieCreditsByID: builder.query({
@@ -32,7 +50,7 @@ export const moviesApi = createApi({
         method: "GET",
         headers: { authorization: `Bearer ${token}` },
       }),
-      providesTags: ["moviesApi"],
+      providesTags: ["movies"],
     }),
 
     getMovieGenres: builder.query({
@@ -41,7 +59,7 @@ export const moviesApi = createApi({
         method: "GET",
         headers: { authorization: `Bearer ${token}` },
       }),
-      providesTags: ["moviesApi"],
+      providesTags: ["movies"],
     }),
 
     getRecommendations: builder.query({
@@ -50,17 +68,17 @@ export const moviesApi = createApi({
         method: "GET",
         headers: { authorization: `Bearer ${token}` },
       }),
-      providesTags: ["moviesApi"],
+      providesTags: ["movies"],
     }),
   }),
 });
 
 export const {
+  useGetAllPopularMoviesQuery ,
+    useGetSearchedResultsQuery,
   useGetMovieByIDQuery,
-  useLazyGetMovieByIDQuery,
   useGetMovieKeysQuery,
   useGetMovieCreditsByIDQuery,
   useGetMovieGenresQuery,
   useGetRecommendationsQuery,
 } = moviesApi;
-export default moviesApi.reducer;

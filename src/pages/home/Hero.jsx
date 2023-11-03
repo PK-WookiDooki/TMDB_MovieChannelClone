@@ -1,14 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { SInput } from "../../components";
-import { useDispatch } from "react-redux";
-import { setKeyword } from "../../features/services/moviesSlice";
 
 const Hero = ({ image }) => {
     const [search, setSearch] = useState("");
 
     const nav = useNavigate();
-    const dispatch = useDispatch();
 
     const handleChange = (e) => {
         setSearch(e.target.value);
@@ -16,12 +13,8 @@ const Hero = ({ image }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!search.trim()) {
-            return nav("/");
-        }
-        nav("search");
-        dispatch(setKeyword(search));
         setSearch("");
+        nav(`search?query=${search}`);
     };
 
     return (

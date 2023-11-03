@@ -21,10 +21,6 @@ export { default as Footer } from "./footer/Footer";
 export { default as MCarousel } from "./carousel/MoviesCarousel";
 export { default as TCarousel } from "./carousel/TrailerCarousel";
 
-// from genres
-export { default as Genre } from "./genres/Genre";
-export { default as GList } from "./genres/GenresList";
-
 //recommendations
 export { default as RecommendedMovies } from "./recommendations/Recommendation";
 
@@ -33,3 +29,6 @@ export { default as SInput } from "./input/SearchInput";
 
 //contact
 export { default as ContactForm } from "./contact/Contact";
+
+// guards
+export {default as SGuard} from "./guard/SearchGuard.jsx"
