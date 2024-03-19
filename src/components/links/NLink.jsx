@@ -1,16 +1,20 @@
 import { NavLink } from "react-router-dom";
+import { cn } from "../../features/utils";
 import "./link.css";
 
-const NLink = ({ path, title, sm, handleChange }) => {
+const NLink = ({ path, title, handleChange }) => {
     return (
         <NavLink
             onClick={handleChange}
             to={path}
-            className={` nav-link relative z-0 py-1 ${
-                sm
-                    ? "text-slate-600 hover:text-slate-900 border-l-4 border-transparent px-2 hover:border-black hover:bg-black/30"
-                    : "text-slate-300 hover:text-white border-b border-transparent hover:border-white px-2 "
-            }   `}
+            className={({ isActive }) =>
+                cn(
+                    "text-gray-500 font-medium md:hover:text-white hover:text-black duration-200",
+                    {
+                        "md:text-white text-black": isActive,
+                    }
+                )
+            }
         >
             {title}
         </NavLink>

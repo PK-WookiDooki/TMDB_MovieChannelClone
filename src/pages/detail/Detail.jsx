@@ -1,5 +1,9 @@
 import { useState } from "react";
+import { BsArrowLeft, BsPlayFill } from "react-icons/bs";
 import { Link, useParams } from "react-router-dom";
+import { MNFPage } from "..";
+import noImg from "../../assets/images/img_noImage.svg";
+import noImgBd from "../../assets/images/no-image.png";
 import {
     AboutM,
     Cast,
@@ -8,7 +12,6 @@ import {
     RecommendedMovies,
     SMenu,
 } from "../../components";
-import { getFormattedRating, getHrsFromMins } from "../../features/functions";
 import Modal from "../../components/miniComponents/Modal";
 import {
     useGetMovieByIDQuery,
@@ -16,17 +19,14 @@ import {
     useGetMovieKeysQuery,
     useGetRecommendationsQuery,
 } from "../../features/apis/moviesApi";
-import { BsArrowLeft, BsPlayFill } from "react-icons/bs";
-import { MNFPage } from "..";
 import {
     useGetTVByIDQuery,
     useGetTVCreditsByIDQuery,
     useGetTVKeysQuery,
     useGetTVRecommendationsQuery,
 } from "../../features/apis/tvApi";
+import { getFormattedRating, getHrsFromMins } from "../../features/utils";
 import "./detail.css";
-import noImg from "../../assets/images/img_noImage.svg"
-import noImgBd from "../../assets/images/no-image.png"
 
 const Detail = ({ type }) => {
     const [active, setActive] = useState(false);
@@ -72,12 +72,17 @@ const Detail = ({ type }) => {
         : "";
 
     // poster
-    const poster = actualMovie?.poster_path == null ? noImg : `https://image.tmdb.org/t/p/original` +
-        actualMovie?.poster_path
+    const poster =
+        actualMovie?.poster_path == null
+            ? noImg
+            : `https://image.tmdb.org/t/p/original` + actualMovie?.poster_path;
 
     // backdrop
-    const backdrop = actualMovie?.poster_path == null ? noImgBd : `https://image.tmdb.org/t/p/original` +
-        actualMovie?.backdrop_path
+    const backdrop =
+        actualMovie?.poster_path == null
+            ? noImgBd
+            : `https://image.tmdb.org/t/p/original` +
+              actualMovie?.backdrop_path;
 
     // content
     const content = actualMovie ? (
@@ -97,7 +102,7 @@ const Detail = ({ type }) => {
 
             <div className={`lg:h-[600px] w-full relative`}>
                 <div className={`overflow-hidden h-full`}>
-                     {/*backdrop poster*/}
+                    {/*backdrop poster*/}
                     <img
                         src={backdrop}
                         className=" w-full mix-blend-hard-light hidden lg:block object-fill "
@@ -113,16 +118,14 @@ const Detail = ({ type }) => {
                 <div className="detail-wrapper">
                     {/* poster */}
                     <div className=" lg:h-full lg:min-w-max lg:w-auto w-[95%] overflow-hidden mt-5 md:mt-0 ">
-
-                            <img
-                                src={poster}
-                                className="h-full object-contain rounded-sm hidden lg:block"
-                            />
-                            <img
-                                src={backdrop}
-                                className=" max-h-[500px] h-full w-full object-cover rounded-sm lg:hidden"
-                            />
-
+                        <img
+                            src={poster}
+                            className="h-full object-contain rounded-sm hidden lg:block"
+                        />
+                        <img
+                            src={backdrop}
+                            className=" max-h-[500px] h-full w-full object-cover rounded-sm lg:hidden"
+                        />
                     </div>
 
                     <div className="w-full flex flex-col items-center md:items-start md:gap-8 gap-4 overflow-auto md:overflow-visible text-center md:text-left">
