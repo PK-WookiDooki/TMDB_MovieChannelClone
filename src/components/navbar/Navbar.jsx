@@ -1,8 +1,7 @@
 import { useState } from "react";
+import { RxCross1, RxHamburgerMenu } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import NLink from "../links/NLink";
-import { RxCross1, RxHamburgerMenu } from "react-icons/rx";
-import Account from "../account/Account";
 
 const Navbar = () => {
     const [menu, setMenu] = useState(false);
@@ -50,9 +49,6 @@ const Navbar = () => {
                         sm={true}
                     />
                 </div>
-                {/*<div className="mt-auto">*/}
-                {/*    <Account sm={true} />*/}
-                {/*</div>*/}
             </div>
         </div>
     );
@@ -76,11 +72,6 @@ const Navbar = () => {
                         <NLink path={"tv"} title={"Series"} />
                         <NLink path={"about"} title={"About Us"} />
                     </ul>
-
-
-                    {/*<div className=" hidden lg:flex">*/}
-                    {/*    <Account />*/}
-                    {/*</div>*/}
 
                     {/* this's a background when menu is activated */}
                     <div
